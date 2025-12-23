@@ -6,7 +6,7 @@ def logging_module(name: str = __name__):
     
     if not logger.handlers:
         logging.basicConfig(level= logging.INFO,
-            format="%(asctype)s %(name)s %(filename)s %(message)s",
+            format="%(asctime)s %(name)s %(filename)s %(message)s",
             filename='logs.log',
             filemode='a')
     
