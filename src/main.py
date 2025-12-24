@@ -1,10 +1,11 @@
 from utils.logging import logging_module
+from utils.save_data import save_data_minio
 
 log = logging_module()
 
 
 def main_pipeline():
-    log.info('hola')
+    save_data_minio()
     
 
 

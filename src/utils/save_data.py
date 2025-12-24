@@ -1,6 +1,7 @@
 from minio import Minio
 from dotenv import dotenv_values
 from .logging import logging_module
+#from pathlib import Path
 
 config = dotenv_values('.env')
 log = logging_module()
@@ -22,3 +23,26 @@ def client_create():
 
 
 
+def save_data_minio():
+    object_name = 'bronze/text.txt'
+    file_path = 'text.txt'
+    
+    
+    
+    try:
+        client = client_create()
+        found = client.bucket_exists(bucket_name)
+        
+        if not found:
+            client.make_bucket(bucket_name)
+            log.info('Bucket Creado Correctamente.')
+        else:
+            log.info('Bucket Encontrado Correctamente.')
+            
+        client.fput_object(
+            bucket_name,
+            object_name,
+            file_path
+        )
+    except Exception as ex:
+        log.error(f'Error al guardar a Minio: {ex}')
