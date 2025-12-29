@@ -3,3 +3,4 @@ __pycache__
 .env
 logs.log
 requeriments.txt
+src/credenciales/credentials.json
