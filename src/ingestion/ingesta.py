@@ -9,9 +9,10 @@ log = logging_module()
 def get_users():
     try:
         log.info('trayendo informacion del usuario!')
+        
         keyapi = apiKey()
 
-        url = f"https://api.openweathermap.org/data/2.5/weather?q=Madrid&appid={keyapi}"
+        url = f"https://api.openweathermap.org/data/2.5/weather?q=Vienna&appid={keyapi}"
 
         res = requests.get(url)
 
