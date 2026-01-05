@@ -12,11 +12,12 @@ bucket_name = config.get('bucket_name')
 
 def client_create():
     log.info('Creando Cliente Minio!')
+    
     try:
         client = Minio(config.get('client'),
-               access_key=config.get('access_key'),
-               secret_key=config.get('secret_key'),
-               secure=False)
+               access_key= config.get('access_key'),
+               secret_key= config.get('secret_key'),
+               secure= False)
         
         return client
     except Exception as ex:
@@ -56,4 +57,5 @@ def save_data_minio(data, route_path):
         
     except Exception as ex:
         log.error(f'Error al guardar a Minio: {ex}')
+        
         raise ex

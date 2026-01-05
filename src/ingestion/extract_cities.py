@@ -1,4 +1,5 @@
 import requests
+import time
 from dotenv import dotenv_values
 from utils.logging import logging_module
 from utils.save_data_minio import save_data_minio
@@ -13,38 +14,48 @@ def get_cities():
     try:
         log.info('Iniciando Extraccion de Ciudades.')
         
-        url = f'http://api.geonames.org/searchJSON'
+        url = 'http://api.geonames.org/searchJSON'
         
         maxRows = 1000
         startRows = 0
+        total_extraido = 0
         
-        params = {
-            "featureClass": "P",
-            "fcode": "PPL",
-            "maxRows": maxRows,
-            "startRow": startRows,
-            "username": f"{username}"
-        }
-        
-        res = requests.get(url, params=params)
-        
-        
-        if res.status_code == 200:
+        while True:
             
-            data = res.json()
-            startRows += maxRows
+            params = {
+                "featureClass": "P",
+                "fcode": "PPL",
+                "maxRows": maxRows,
+                "startRow": startRows,
+                "username": username
+            }
             
-            log.info('Extraccion Completado de Ciudades.')
+            res = requests.get(url, params=params, timeout=30)
             
-            save_data_minio(
-                data,
-                "bronze/cities/cities.json"
-            )
-        else:
-            log.error(f'Error falla en la peticion: {res.status_code}: {res.text}')
+            if res.status_code == 200:
+                
+                data = res.json()
+                geonames = data.get('geonames', [])
+                
+                if not geonames:
+                    log.info(f'No hay mas ciudades. Extraccion completada con {total_extraido} ciudades.')
+                    break
+                
+                save_data_minio(
+                    geonames,
+                    f"bronze/cities/cities_{startRows:08d}.json"
+                )
+                
+                total_extraido += len(geonames)
+                log.info(f"Guardadas {len(geonames)} ciudades desde startRow={startRows} (Total: {total_extraido})")
+                
+                startRows += maxRows
+                time.sleep(1.1)
+
+            else:
+                log.error(f'Error en la peticion de ciudades: {res.status_code}: {res.text}')
+                break
             
     except Exception as ex:
-        log.error(f'error :{ex}')
+        log.error(f'Error: {ex}')
         raise ex
-        
-
