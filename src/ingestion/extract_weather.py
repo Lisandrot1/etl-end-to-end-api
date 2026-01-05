@@ -19,7 +19,6 @@ def get_weather():
         if res.status_code == 200:
             data = res.json()
             log.info('Extraccion Completado de Weather.')
-            print(data)
             return data
         else:
             log.warning(f'Peticion de Usuario Fallido: {res.status_code}: {res.text}')

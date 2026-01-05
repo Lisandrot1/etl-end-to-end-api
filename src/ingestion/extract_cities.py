@@ -1,6 +1,7 @@
 import requests
 from dotenv import dotenv_values
 from utils.logging import logging_module
+from utils.save_data_minio import save_data_minio
 
 
 log = logging_module()
@@ -33,8 +34,12 @@ def get_cities():
             data = res.json()
             startRows += maxRows
             
-            print(data)
             log.info('Extraccion Completado de Ciudades.')
+            
+            save_data_minio(
+                data,
+                "bronze/cities/cities.json"
+            )
         else:
             log.error(f'Error falla en la peticion: {res.status_code}: {res.text}')
             

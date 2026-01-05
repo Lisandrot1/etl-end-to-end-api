@@ -9,6 +9,7 @@ log = logging_module()
 def main_pipeline():
     log.info('='*50)
     log.info('Iniciando Pipeline ETL')
+    
     get_weather()
     get_cities()
 

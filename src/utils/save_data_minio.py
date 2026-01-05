@@ -1,7 +1,9 @@
+import io
+import json
 from minio import Minio
 from dotenv import dotenv_values
 from .logging import logging_module
-#from pathlib import Path
+from pathlib import Path
 
 config = dotenv_values('.env')
 log = logging_module()
@@ -23,12 +25,9 @@ def client_create():
 
 
 
-def save_data_minio():
-    object_name = 'bronze/text.txt'
-    file_path = 'text.txt'
-    
-    
-    
+def save_data_minio(data, route_path):
+    path = Path(route_path).as_posix()
+
     try:
         client = client_create()
         found = client.bucket_exists(bucket_name)
@@ -36,13 +35,25 @@ def save_data_minio():
         if not found:
             client.make_bucket(bucket_name)
             log.info('Bucket Creado Correctamente.')
+            
         else:
             log.info('Bucket Encontrado Correctamente.')
+        
+        json_bytes = json.dumps(data, indent=2, ensure_ascii=False).encode('utf-8')
+        json_bytesid = io.BytesIO(json_bytes)
+        
+        
+        client.put_object(
             
-        client.fput_object(
-            bucket_name,
-            object_name,
-            file_path
+            bucket_name = bucket_name,
+            object_name = path,
+            data = json_bytesid,
+            length = len(json_bytes),
+            content_type = 'application/json'
         )
+        
+        log.info(f'{path} Guardado Correctamente.')
+        
     except Exception as ex:
         log.error(f'Error al guardar a Minio: {ex}')
+        raise ex
