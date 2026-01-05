@@ -10,7 +10,7 @@ username = config.get('username')
 
 def get_cities():
     try:
-        log.info('Iniciando Ingesta de Ciudades.')
+        log.info('Iniciando Extraccion de Ciudades.')
         
         url = f'http://api.geonames.org/searchJSON'
         
@@ -29,11 +29,12 @@ def get_cities():
         
         
         if res.status_code == 200:
+            
             data = res.json()
             startRows += maxRows
             
             print(data)
-            log.info('Terminando Ingesta de Ciudades.')
+            log.info('Extraccion Completado de Ciudades.')
         else:
             log.error(f'Error falla en la peticion: {res.status_code}: {res.text}')
             

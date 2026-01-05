@@ -6,9 +6,9 @@ log = logging_module()
 
 
 
-def get_users():
+def get_weather():
     try:
-        log.info('trayendo informacion del usuario!')
+        log.info('Extraccion Del Clima Weather!')
         
         keyapi = apiKey()
 
@@ -18,6 +18,7 @@ def get_users():
 
         if res.status_code == 200:
             data = res.json()
+            log.info('Extraccion Completado de Weather.')
             print(data)
             return data
         else:
