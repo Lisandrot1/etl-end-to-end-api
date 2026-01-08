@@ -26,7 +26,7 @@ def client_create():
 
 
 
-def save_data_minio(data, route_path):
+def save_data_storage(data, route_path):
     path = Path(route_path).as_posix()
 
     try:

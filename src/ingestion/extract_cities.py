@@ -2,7 +2,7 @@ import requests
 import time
 from dotenv import dotenv_values
 from utils.logging import logging_module
-from utils.save_data_minio import save_data_minio
+from utils.save_data_minio import save_data_storage
 
 
 log = logging_module()
@@ -41,7 +41,7 @@ def get_cities():
                     log.info(f'No hay mas ciudades. Extraccion completada con {total_extraido} ciudades.')
                     break
                 
-                save_data_minio(
+                save_data_storage(
                     geonames,
                     f"bronze/cities/cities_{startRows:08d}.json"
                 )
