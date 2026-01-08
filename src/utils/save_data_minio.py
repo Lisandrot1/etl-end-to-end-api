@@ -59,3 +59,12 @@ def save_data_minio(data, route_path):
         log.error(f'Error al guardar a Minio: {ex}')
         
         raise ex
+    
+    
+def get_bucket():
+    client = client_create()
+    
+    
+    client.remove_bucket('etl-end-to-ends')
+
+
