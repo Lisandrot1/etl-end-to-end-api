@@ -1,8 +1,8 @@
 import json
 from pathlib import Path
-from .logging import logging_module
+from .logging import infra_logger
 
-log = logging_module()
+log = infra_logger()
 route = Path('src/credenciales/credentials.json')
 
 def apiKey():

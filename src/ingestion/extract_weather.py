@@ -1,8 +1,8 @@
 import requests
-from utils.logging import logging_module
+from utils.logging import ingestion_logger
 from utils.apikey import apiKey
 
-log = logging_module()
+log = ingestion_logger()
 
 
 
