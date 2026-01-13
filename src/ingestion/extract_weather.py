@@ -1,8 +1,8 @@
 import requests
-from utils.logging import logging_module
+from utils.logging import ingestion_logger
 from dotenv import dotenv_values
 
-log = logging_module()
+log = ingestion_logger()
 
 api_key = dotenv_values('.env')
 

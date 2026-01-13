@@ -1,0 +1,74 @@
+2026-01-09 11:06:45,938 | INFO | INGESTION | extract_cities.py | Iniciando Extraccion de Ciudades.
+2026-01-09 11:06:47,618 | INFO | INGESTION | save_data_minio.py | Bucket Encontrado Correctamente.
+2026-01-09 11:06:47,721 | INFO | INGESTION | save_data_minio.py | bronze/cities/cities_00000000.json Guardado Correctamente.
+2026-01-09 11:06:47,722 | INFO | INGESTION | extract_cities.py | Guardadas 1000 ciudades desde startRow=0 (Total: 1000)
+2026-01-09 11:06:49,398 | INFO | INGESTION | save_data_minio.py | Bucket Encontrado Correctamente.
+2026-01-09 11:06:49,515 | INFO | INGESTION | save_data_minio.py | bronze/cities/cities_00001000.json Guardado Correctamente.
+2026-01-09 11:06:49,515 | INFO | INGESTION | extract_cities.py | Guardadas 1000 ciudades desde startRow=1000 (Total: 2000)
+2026-01-09 11:06:51,178 | INFO | INGESTION | save_data_minio.py | Bucket Encontrado Correctamente.
+2026-01-09 11:06:51,275 | INFO | INGESTION | save_data_minio.py | bronze/cities/cities_00002000.json Guardado Correctamente.
+2026-01-09 11:06:51,275 | INFO | INGESTION | extract_cities.py | Guardadas 1000 ciudades desde startRow=2000 (Total: 3000)
+2026-01-09 11:06:53,176 | INFO | INGESTION | save_data_minio.py | Bucket Encontrado Correctamente.
+2026-01-09 11:06:53,262 | INFO | INGESTION | save_data_minio.py | bronze/cities/cities_00003000.json Guardado Correctamente.
+2026-01-09 11:06:53,263 | INFO | INGESTION | extract_cities.py | Guardadas 1000 ciudades desde startRow=3000 (Total: 4000)
+2026-01-09 11:06:54,970 | INFO | INGESTION | save_data_minio.py | Bucket Encontrado Correctamente.
+2026-01-09 11:06:55,081 | INFO | INGESTION | save_data_minio.py | bronze/cities/cities_00004000.json Guardado Correctamente.
+2026-01-09 11:06:55,081 | INFO | INGESTION | extract_cities.py | Guardadas 1000 ciudades desde startRow=4000 (Total: 5000)
+2026-01-09 11:06:56,764 | INFO | INGESTION | save_data_minio.py | Bucket Encontrado Correctamente.
+2026-01-09 11:06:56,848 | INFO | INGESTION | save_data_minio.py | bronze/cities/cities_00005000.json Guardado Correctamente.
+2026-01-09 11:06:56,849 | INFO | INGESTION | extract_cities.py | Guardadas 1000 ciudades desde startRow=5000 (Total: 6000)
+2026-01-09 11:06:57,868 | INFO | INGESTION | extract_cities.py | No hay mas ciudades. Extraccion completada con 6000 ciudades.
+2026-01-09 11:16:14,756 | INFO | INGESTION | extract_cities.py | Iniciando Extraccion de Ciudades.
+2026-01-09 11:16:16,476 | INFO | INGESTION | save_data_minio.py | Creando Cliente Minio!
+2026-01-09 11:16:16,494 | INFO | INGESTION | save_data_minio.py | Bucket Encontrado Correctamente.
+2026-01-09 11:16:16,599 | INFO | INGESTION | save_data_minio.py | bronze/cities/cities_00000000.json Guardado Correctamente.
+2026-01-09 11:16:16,599 | INFO | INGESTION | extract_cities.py | Guardadas 1000 ciudades desde startRow=0 (Total: 1000)
+2026-01-09 11:16:18,466 | INFO | INGESTION | save_data_minio.py | Creando Cliente Minio!
+2026-01-09 11:16:18,478 | INFO | INGESTION | save_data_minio.py | Bucket Encontrado Correctamente.
+2026-01-09 11:16:18,583 | INFO | INGESTION | save_data_minio.py | bronze/cities/cities_00001000.json Guardado Correctamente.
+2026-01-09 11:16:18,583 | INFO | INGESTION | extract_cities.py | Guardadas 1000 ciudades desde startRow=1000 (Total: 2000)
+2026-01-09 11:16:20,235 | INFO | INGESTION | save_data_minio.py | Creando Cliente Minio!
+2026-01-09 11:16:20,242 | INFO | INGESTION | save_data_minio.py | Bucket Encontrado Correctamente.
+2026-01-09 11:16:20,329 | INFO | INGESTION | save_data_minio.py | bronze/cities/cities_00002000.json Guardado Correctamente.
+2026-01-09 11:16:20,329 | INFO | INGESTION | extract_cities.py | Guardadas 1000 ciudades desde startRow=2000 (Total: 3000)
+2026-01-09 11:16:22,294 | INFO | INGESTION | save_data_minio.py | Creando Cliente Minio!
+2026-01-09 11:16:22,305 | INFO | INGESTION | save_data_minio.py | Bucket Encontrado Correctamente.
+2026-01-09 11:16:22,409 | INFO | INGESTION | save_data_minio.py | bronze/cities/cities_00003000.json Guardado Correctamente.
+2026-01-09 11:16:22,409 | INFO | INGESTION | extract_cities.py | Guardadas 1000 ciudades desde startRow=3000 (Total: 4000)
+2026-01-09 11:16:24,058 | INFO | INGESTION | save_data_minio.py | Creando Cliente Minio!
+2026-01-09 11:16:24,076 | INFO | INGESTION | save_data_minio.py | Bucket Encontrado Correctamente.
+2026-01-09 11:16:24,183 | INFO | INGESTION | save_data_minio.py | bronze/cities/cities_00004000.json Guardado Correctamente.
+2026-01-09 11:16:24,183 | INFO | INGESTION | extract_cities.py | Guardadas 1000 ciudades desde startRow=4000 (Total: 5000)
+2026-01-09 11:16:25,861 | INFO | INGESTION | save_data_minio.py | Creando Cliente Minio!
+2026-01-09 11:16:25,870 | INFO | INGESTION | save_data_minio.py | Bucket Encontrado Correctamente.
+2026-01-09 11:16:25,976 | INFO | INGESTION | save_data_minio.py | bronze/cities/cities_00005000.json Guardado Correctamente.
+2026-01-09 11:16:25,976 | INFO | INGESTION | extract_cities.py | Guardadas 1000 ciudades desde startRow=5000 (Total: 6000)
+2026-01-09 11:16:26,762 | INFO | INGESTION | extract_cities.py | No hay mas ciudades. Extraccion completada con 6000 ciudades.
+2026-01-13 16:04:19,001 | INFO | INGESTION | extract_weather.py | Extraccion Del Clima Weather!
+2026-01-13 16:04:19,800 | INFO | INGESTION | extract_weather.py | Extraccion Completado de Weather.
+2026-01-13 16:04:19,801 | INFO | INGESTION | extract_cities.py | Iniciando Extraccion de Ciudades.
+2026-01-13 16:04:21,606 | INFO | INGESTION | save_data_minio.py | Creando Cliente Minio!
+2026-01-13 16:04:21,639 | INFO | INGESTION | save_data_minio.py | Bucket Encontrado Correctamente.
+2026-01-13 16:04:21,734 | INFO | INGESTION | save_data_minio.py | bronze/cities/cities_00000000.json Guardado Correctamente.
+2026-01-13 16:04:21,734 | INFO | INGESTION | extract_cities.py | Guardadas 1000 ciudades desde startRow=0 (Total: 1000)
+2026-01-13 16:04:23,603 | INFO | INGESTION | save_data_minio.py | Creando Cliente Minio!
+2026-01-13 16:04:23,626 | INFO | INGESTION | save_data_minio.py | Bucket Encontrado Correctamente.
+2026-01-13 16:04:23,714 | INFO | INGESTION | save_data_minio.py | bronze/cities/cities_00001000.json Guardado Correctamente.
+2026-01-13 16:04:23,715 | INFO | INGESTION | extract_cities.py | Guardadas 1000 ciudades desde startRow=1000 (Total: 2000)
+2026-01-13 16:04:25,520 | INFO | INGESTION | save_data_minio.py | Creando Cliente Minio!
+2026-01-13 16:04:25,529 | INFO | INGESTION | save_data_minio.py | Bucket Encontrado Correctamente.
+2026-01-13 16:04:25,631 | INFO | INGESTION | save_data_minio.py | bronze/cities/cities_00002000.json Guardado Correctamente.
+2026-01-13 16:04:25,631 | INFO | INGESTION | extract_cities.py | Guardadas 1000 ciudades desde startRow=2000 (Total: 3000)
+2026-01-13 16:04:27,593 | INFO | INGESTION | save_data_minio.py | Creando Cliente Minio!
+2026-01-13 16:04:27,604 | INFO | INGESTION | save_data_minio.py | Bucket Encontrado Correctamente.
+2026-01-13 16:04:27,707 | INFO | INGESTION | save_data_minio.py | bronze/cities/cities_00003000.json Guardado Correctamente.
+2026-01-13 16:04:27,708 | INFO | INGESTION | extract_cities.py | Guardadas 1000 ciudades desde startRow=3000 (Total: 4000)
+2026-01-13 16:04:29,582 | INFO | INGESTION | save_data_minio.py | Creando Cliente Minio!
+2026-01-13 16:04:29,599 | INFO | INGESTION | save_data_minio.py | Bucket Encontrado Correctamente.
+2026-01-13 16:04:29,697 | INFO | INGESTION | save_data_minio.py | bronze/cities/cities_00004000.json Guardado Correctamente.
+2026-01-13 16:04:29,697 | INFO | INGESTION | extract_cities.py | Guardadas 1000 ciudades desde startRow=4000 (Total: 5000)
+2026-01-13 16:04:31,431 | INFO | INGESTION | save_data_minio.py | Creando Cliente Minio!
+2026-01-13 16:04:31,445 | INFO | INGESTION | save_data_minio.py | Bucket Encontrado Correctamente.
+2026-01-13 16:04:31,536 | INFO | INGESTION | save_data_minio.py | bronze/cities/cities_00005000.json Guardado Correctamente.
+2026-01-13 16:04:31,536 | INFO | INGESTION | extract_cities.py | Guardadas 1000 ciudades desde startRow=5000 (Total: 6000)
+2026-01-13 16:04:32,273 | INFO | INGESTION | extract_cities.py | No hay mas ciudades. Extraccion completada con 6000 ciudades.

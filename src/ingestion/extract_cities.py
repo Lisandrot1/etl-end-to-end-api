@@ -1,11 +1,11 @@
 import requests
 import time
 from dotenv import dotenv_values
-from utils.logging import logging_module
+from utils.logging import ingestion_logger
 from utils.save_data_minio import save_data_storage
 
 
-log = logging_module()
+log = ingestion_logger()
 config = dotenv_values('.env')
 
 username = config.get('username')
@@ -50,7 +50,7 @@ def get_cities():
                 log.info(f"Guardadas {len(geonames)} ciudades desde startRow={startRows} (Total: {total_extraido})")
                 
                 startRows += maxRows
-                time.sleep(1.1)
+                time.sleep(0.3)
 
             else:
                 log.error(f'Error en la peticion de ciudades: {res.status_code}: {res.text}')

@@ -1,0 +1,4 @@
+requests
+pyspark
+python-dotenv
+minio
