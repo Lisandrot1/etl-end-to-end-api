@@ -1,16 +1,16 @@
 import requests
 from utils.logging import logging_module
-from utils.apikey import apiKey
+from dotenv import dotenv_values
 
 log = logging_module()
 
-
+api_key = dotenv_values('.env')
 
 def get_weather():
     try:
         log.info('Extraccion Del Clima Weather!')
         
-        keyapi = apiKey()
+        keyapi = api_key.get('apiweather')
 
         url = f"https://api.openweathermap.org/data/2.5/weather?q=Vienna&appid={keyapi}"
 
