@@ -1,26 +1,34 @@
 import io
 import json
 from minio import Minio
-from dotenv import dotenv_values
+from utils.config import config_env
 from .logging import ingestion_logger
 from pathlib import Path
 
-config = dotenv_values('.env')
+config = config_env()
 
 log_ingestion = ingestion_logger()
 bucket_name = config.get('bucket_name')
 
 
+_minio_client = None
+
 def client_create():
+    global _minio_client  # Usamos la variable global
+    
+    # 2. Si ya existe el cliente, lo devolvemos sin crear uno nuevo
+    if _minio_client is not None:
+        return _minio_client
+    
     log_ingestion.info('Creando Cliente Minio!')
     
     try:
-        client = Minio(config.get('client'),
+        _minio_client = Minio(config.get('client'),
                access_key= config.get('access_key'),
                secret_key= config.get('secret_key'),
                secure= False)
         
-        return client
+        return _minio_client
     except Exception as ex:
         log_ingestion.error('Error al Crear Cliente Minio: {ex}')
         raise ex

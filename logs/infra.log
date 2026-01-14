@@ -1,12 +1,6 @@
-2026-01-09 11:06:45,938 | INFO | INFRA | main.py | ==================================================
-2026-01-09 11:06:45,938 | INFO | INFRA | main.py | Iniciando Pipeline ETL
-2026-01-09 11:06:47,601 | INFO | INFRA | save_data_minio.py | Creando Cliente Minio!
-2026-01-09 11:06:49,390 | INFO | INFRA | save_data_minio.py | Creando Cliente Minio!
-2026-01-09 11:06:51,139 | INFO | INFRA | save_data_minio.py | Creando Cliente Minio!
-2026-01-09 11:06:53,168 | INFO | INFRA | save_data_minio.py | Creando Cliente Minio!
-2026-01-09 11:06:54,958 | INFO | INFRA | save_data_minio.py | Creando Cliente Minio!
-2026-01-09 11:06:56,737 | INFO | INFRA | save_data_minio.py | Creando Cliente Minio!
-2026-01-09 11:16:14,755 | INFO | INFRA | main.py | ==================================================
-2026-01-09 11:16:14,756 | INFO | INFRA | main.py | Iniciando Pipeline ETL
-2026-01-13 16:04:18,991 | INFO | INFRA | main.py | ==================================================
-2026-01-13 16:04:19,000 | INFO | INFRA | main.py | Iniciando Pipeline ETL
+2026-01-13 17:03:15,927 | INFO | INFRA | main.py | ==================================================
+2026-01-13 17:03:15,927 | INFO | INFRA | main.py | Iniciando Pipeline ETL
+2026-01-13 17:06:09,418 | INFO | INFRA | main.py | ==================================================
+2026-01-13 17:06:09,418 | INFO | INFRA | main.py | Iniciando Pipeline ETL
+2026-01-13 17:07:31,479 | INFO | INFRA | main.py | ==================================================
+2026-01-13 17:07:31,479 | INFO | INFRA | main.py | Iniciando Pipeline ETL

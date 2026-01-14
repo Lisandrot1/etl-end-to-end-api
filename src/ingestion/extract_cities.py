@@ -1,12 +1,12 @@
 import requests
 import time
-from dotenv import dotenv_values
+from utils.config import config_env
 from utils.logging import ingestion_logger
 from utils.save_data_minio import save_data_storage
 
 
 log = ingestion_logger()
-config = dotenv_values('.env')
+config = config_env()
 
 username = config.get('username')
 

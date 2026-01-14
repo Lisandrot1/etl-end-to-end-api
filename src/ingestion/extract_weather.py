@@ -1,16 +1,15 @@
 import requests
 from utils.logging import ingestion_logger
-from dotenv import dotenv_values
-
+from utils.config import config_env
 log = ingestion_logger()
 
-api_key = dotenv_values('.env')
+config = config_env()
 
 def get_weather():
     try:
         log.info('Extraccion Del Clima Weather!')
         
-        keyapi = api_key.get('apiweather')
+        keyapi = config.get('apiweather')
 
         url = f"https://api.openweathermap.org/data/2.5/weather?q=Vienna&appid={keyapi}"
 
