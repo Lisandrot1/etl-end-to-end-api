@@ -1,4 +1,5 @@
 requests
-pyspark
 python-dotenv
 minio
+pandas
+s3fs

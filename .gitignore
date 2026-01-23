@@ -1,6 +1,8 @@
-.venv
+venv
 __pycache__
 .env
 logs.log
 requeriments.txt
 src/credenciales/credentials.json
+notebooks/*csv
+notebooks/spark-warehouse

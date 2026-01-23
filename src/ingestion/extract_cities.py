@@ -1,5 +1,6 @@
 import requests
 import time
+from datetime import date
 from utils.config import config_env
 from utils.logging import ingestion_logger
 from utils.save_data_minio import save_data_storage
@@ -19,6 +20,7 @@ def get_cities():
         maxRows = 1000
         startRows = 0
         total_extraido = 0
+        today = date.today()
         
         while True:
             
@@ -39,11 +41,12 @@ def get_cities():
                 
                 if not geonames:
                     log.info(f'No hay mas ciudades. Extraccion completada con {total_extraido} ciudades.')
+                    log.info('='*50)
                     break
                 
                 save_data_storage(
                     geonames,
-                    f"bronze/cities/cities_{startRows:08d}.json"
+                    f"bronze/cities/ingest-date-{today}/cities_{startRows:08d}.json"
                 )
                 
                 total_extraido += len(geonames)
