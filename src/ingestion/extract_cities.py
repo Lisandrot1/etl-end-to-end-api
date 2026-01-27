@@ -20,7 +20,9 @@ def get_cities():
         maxRows = 1000
         startRows = 0
         total_extraido = 0
+        
         today = date.today()
+        ingest_date = today.replace(day=1).isoformat()
         
         while True:
             
@@ -44,15 +46,18 @@ def get_cities():
                     log.info('='*50)
                     break
                 
-                save_data_storage(
-                    geonames,
-                    f"bronze/cities/ingest-date-{today}/cities_{startRows:08d}.json"
-                )
+                
                 
                 total_extraido += len(geonames)
-                log.info(f"Guardadas {len(geonames)} ciudades desde startRow={startRows} (Total: {total_extraido})")
+                log.info(f"Guardadas {len(geonames)} (Total: {total_extraido})")
                 
                 startRows += maxRows
+                ## Llamamos a la funcin que guarda los datos crudos a minio
+                save_data_storage(
+                    geonames,
+                    f"bronze/cities/ingest_date={ingest_date}/cities_{startRows:05d}.json"
+                )
+                
                 time.sleep(0.3)
 
             else:

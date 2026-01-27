@@ -1,31 +1,37 @@
 import pandas as pd
-from utils.save_data_minio import client_create
+import s3fs
 from utils.config import config_env
-from utils.logging import transform_logger
-#from s3fs import S3FileSystem
-log = transform_logger()
+#from utils.logging import transform_logger
+
+
 
 def read_cities():
     config = config_env()
     
-    
+    bucketname  = config.get('bucket_name')
+    access_key = config.get('access_key')
+    secret_key = config.get('secret_key')
+    endpoint = config.get("minio_endpoint")
     try:
-        log.info('Iniciando a Leer datos de Bronze')
-        
-        df = pd.read_json(
-            's3://etl-end-to-end/bronze/cities/cities_00000000.json',
-            storage_options={
-                'endpoint_url': config.get('minio_endpoint'),
-                'key': config.get('access_key'),
-                'secret': config.get('secret_key')
+        fs = s3fs.S3FileSystem(
+            key=access_key,
+            secret=secret_key,
+            client_kwargs={
+                "endpoint_url": endpoint
             }
         )
         
-        print(df.head(10))
-        return df
+        path = f'{bucketname}/bronze/cities/insget_date=2026-01-01/*.json'
+        
+        dfs = []
+        for file in fs.glob(path):
+            with fs.open(file) as f:
+                df = pd.read_json(f)    
+                dfs.append(df)
+                print('dataframe',df)
         
     except Exception as ex:
-        log.error(f'Error al Leer datos de Bronze: {ex}')
+        print(f'Error al Leer datos de Bronze: {ex}')
         
     
     

@@ -1,8 +1,0 @@
-2026-01-23 10:35:54,462 | INFO | TRANSFORM | transform_cities.py | Iniciando a Leer datos de Bronze
-2026-01-23 10:41:37,298 | INFO | TRANSFORM | transform_cities.py | Iniciando a Leer datos de Bronze
-2026-01-23 10:41:37,298 | ERROR | TRANSFORM | transform_cities.py | Error al Leer datos de Bronze: 'Minio' object has no attribute 'open'
-2026-01-23 10:46:57,561 | INFO | TRANSFORM | transform_cities.py | Iniciando a Leer datos de Bronze
-2026-01-23 10:46:57,561 | ERROR | TRANSFORM | transform_cities.py | Error al Leer datos de Bronze: read_json() got an unexpected keyword argument 'filesystem'
-2026-01-23 10:53:45,654 | INFO | TRANSFORM | transform_cities.py | Iniciando a Leer datos de Bronze
-2026-01-23 10:54:02,608 | ERROR | TRANSFORM | transform_cities.py | Error al Leer datos de Bronze: Invalid endpoint: localhost:9000
-2026-01-23 10:54:50,369 | INFO | TRANSFORM | transform_cities.py | Iniciando a Leer datos de Bronze
