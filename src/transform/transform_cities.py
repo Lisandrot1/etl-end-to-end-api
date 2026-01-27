@@ -1,5 +1,6 @@
 import pandas as pd
-import s3fs
+import boto3
+from io import BytesIO
 from utils.config import config_env
 #from utils.logging import transform_logger
 
@@ -12,23 +13,40 @@ def read_cities():
     access_key = config.get('access_key')
     secret_key = config.get('secret_key')
     endpoint = config.get("minio_endpoint")
+    
     try:
-        fs = s3fs.S3FileSystem(
-            key=access_key,
-            secret=secret_key,
-            client_kwargs={
-                "endpoint_url": endpoint
-            }
+        s3 = boto3.client(
+            's3',
+            endpoint_url=endpoint,  
+            aws_access_key_id=access_key,
+            aws_secret_access_key=secret_key,
+            region_name='us-east-1'
         )
+       
+        prefix = 'bronze/cities/ingest_date=2026-01-01'
         
-        path = f'{bucketname}/bronze/cities/insget_date=2026-01-01/*.json'
-        
+        response = s3.list_objects_v2(
+            Bucket=bucketname,
+            Prefix = prefix
+        )
         dfs = []
-        for file in fs.glob(path):
-            with fs.open(file) as f:
-                df = pd.read_json(f)    
+        if 'Contents' in response:
+            for meta in response.get('Contents', []):
+                key = meta["Key"]
+                obj = s3.get_object(Bucket=bucketname, Key=key)
+                data = obj["Body"].read()
+
+                df = pd.read_json(BytesIO(data))
                 dfs.append(df)
-                print('dataframe',df)
+        else:
+                print("No files found in the bucket.")
+                
+        final_df = pd.concat(dfs, ignore_index=True)
+
+        print(final_df)
+        
+        
+       
         
     except Exception as ex:
         print(f'Error al Leer datos de Bronze: {ex}')

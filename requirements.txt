@@ -3,3 +3,4 @@ python-dotenv
 minio
 pandas
 s3fs
+boto3
