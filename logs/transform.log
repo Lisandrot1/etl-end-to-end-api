@@ -1,0 +1,6 @@
+2026-01-28 16:54:01,172 | INFO | TRANSFORM | transform_cities.py | Iniciando con Lectura de datos.
+2026-01-28 16:54:10,679 | INFO | TRANSFORM | transform_cities.py | Finalizacion Lectura de Datos bronze
+2026-01-28 16:54:10,680 | INFO | TRANSFORM | transform_cities.py | Inicando Transformacion de datos.
+2026-01-28 16:54:10,687 | INFO | TRANSFORM | save_data_minio.py | Bucket Encontrado Correctamente..
+2026-01-28 16:54:10,719 | INFO | TRANSFORM | save_data_minio.py | Guardado Correctamente.
+2026-01-28 16:54:10,719 | INFO | TRANSFORM | save_data_minio.py | ==================================================

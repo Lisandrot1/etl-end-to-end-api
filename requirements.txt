@@ -4,3 +4,4 @@ minio
 pandas
 s3fs
 boto3
+pyarrow

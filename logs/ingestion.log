@@ -76,3 +76,8 @@
 2026-01-27 12:32:36,297 | INFO | INGESTION | save_data_minio.py | bronze/cities/ingest_date=2026-01-01/cities_06000.json Guardado Correctamente.
 2026-01-27 12:32:37,039 | INFO | INGESTION | extract_cities.py | No hay mas ciudades. Extraccion completada con 6000 ciudades.
 2026-01-27 12:32:37,041 | INFO | INGESTION | extract_cities.py | ==================================================
+2026-01-28 15:44:36,762 | INFO | INGESTION | save_data_minio.py | Creando Cliente Minio!
+2026-01-28 16:50:41,264 | INFO | INGESTION | save_data_minio.py | Creando Cliente Minio!
+2026-01-28 16:51:40,734 | INFO | INGESTION | save_data_minio.py | Creando Cliente Minio!
+2026-01-28 16:52:33,677 | INFO | INGESTION | save_data_minio.py | Creando Cliente Minio!
+2026-01-28 16:54:10,682 | INFO | INGESTION | save_data_minio.py | Creando Cliente Minio!

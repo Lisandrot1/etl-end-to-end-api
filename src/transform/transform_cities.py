@@ -2,9 +2,10 @@ import pandas as pd
 import boto3
 from io import BytesIO
 from utils.config import config_env
-#from utils.logging import transform_logger
+from utils.logging import transform_logger
+from utils.save_data_minio import save_to_parquet
 
-
+log = transform_logger()
 
 def read_cities():
     config = config_env()
@@ -15,6 +16,7 @@ def read_cities():
     endpoint = config.get("minio_endpoint")
     
     try:
+        log.info('Iniciando con Lectura de datos.')
         s3 = boto3.client(
             's3',
             endpoint_url=endpoint,  
@@ -39,20 +41,32 @@ def read_cities():
                 df = pd.read_json(BytesIO(data))
                 dfs.append(df)
         else:
-                print("No files found in the bucket.")
+                log.error("No files found in the bucket.")
                 
         final_df = pd.concat(dfs, ignore_index=True)
-
-        print(final_df)
         
-        
-       
+        log.info('Finalizacion Lectura de Datos bronze')
+        return final_df
         
     except Exception as ex:
-        print(f'Error al Leer datos de Bronze: {ex}')
+        log.error(f'Error al Leer datos de Bronze: {ex}')
+        raise ex
         
     
-    
-    
-
+def transform_cities():
+    try:
+        df_cities = read_cities()
+        
+        log.info('Inicando Transformacion de datos.')
+        
+        df = df_cities[['name']]
+        
+        save_to_parquet(
+            df,
+            f'silver/cities/current/cities.parquet'
+        )
+        
+    except Exception as ex:
+        log.error(f'Error En la Transformacion de Cities: {ex}')
+        raise ex
 
