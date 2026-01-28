@@ -1,6 +1,6 @@
 import requests
 import time
-from datetime import date
+from datetime import datetime
 from utils.config import config_env
 from utils.logging import ingestion_logger
 from utils.save_data_minio import save_data_storage
@@ -21,8 +21,8 @@ def get_cities():
         startRows = 0
         total_extraido = 0
         
-        today = date.today()
-        ingest_date = today.replace(day=1).isoformat()
+        execution_date = datetime.now().strftime("%Y-%m-%d")
+
         
         while True:
             
@@ -55,7 +55,7 @@ def get_cities():
                 ## Llamamos a la funcin que guarda los datos crudos a minio
                 save_data_storage(
                     geonames,
-                    f"bronze/cities/ingest_date={ingest_date}/cities_{startRows:05d}.json"
+                    f"bronze/cities/execution_date={execution_date}/cities_{startRows:05d}.json"
                 )
                 
                 time.sleep(0.3)
