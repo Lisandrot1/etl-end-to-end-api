@@ -1,0 +1,7 @@
+.gitignore
+venv
+__pychache__/
+.env
+.git/
+Dockerfile
+docker-compose.yaml

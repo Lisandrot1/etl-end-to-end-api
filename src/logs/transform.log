@@ -1,0 +1,12 @@
+2026-01-29 16:36:33,853 | INFO | TRANSFORM | transform_cities.py | Iniciando con Lectura de datos.
+2026-01-29 16:36:34,076 | ERROR | TRANSFORM | transform_cities.py | Error al Leer datos de Bronze: expected string or bytes-like object, got 'NoneType'
+2026-01-29 16:36:34,077 | ERROR | TRANSFORM | transform_cities.py | Error En la Transformacion de Cities: expected string or bytes-like object, got 'NoneType'
+2026-01-29 16:42:03,468 | INFO | TRANSFORM | transform_cities.py | Iniciando con Lectura de datos.
+2026-01-29 16:42:03,741 | ERROR | TRANSFORM | transform_cities.py | Error al Leer datos de Bronze: expected string or bytes-like object, got 'NoneType'
+2026-01-29 16:42:03,742 | ERROR | TRANSFORM | transform_cities.py | Error En la Transformacion de Cities: expected string or bytes-like object, got 'NoneType'
+2026-01-29 16:44:40,267 | INFO | TRANSFORM | transform_cities.py | Iniciando con Lectura de datos.
+2026-01-29 16:44:40,555 | ERROR | TRANSFORM | transform_cities.py | Error al Leer datos de Bronze: expected string or bytes-like object, got 'NoneType'
+2026-01-29 16:44:40,556 | ERROR | TRANSFORM | transform_cities.py | Error En la Transformacion de Cities: expected string or bytes-like object, got 'NoneType'
+2026-01-29 16:45:24,967 | INFO | TRANSFORM | transform_cities.py | Iniciando con Lectura de datos.
+2026-01-29 16:45:25,118 | ERROR | TRANSFORM | transform_cities.py | Error al Leer datos de Bronze: expected string or bytes-like object, got 'NoneType'
+2026-01-29 16:45:25,118 | ERROR | TRANSFORM | transform_cities.py | Error En la Transformacion de Cities: expected string or bytes-like object, got 'NoneType'

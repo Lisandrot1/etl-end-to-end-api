@@ -1,0 +1,30 @@
+2026-01-29 16:36:33,010 | INFO | INFRA | main.py | ==================================================
+2026-01-29 16:36:33,011 | INFO | INFRA | main.py | Iniciando Pipeline ETL
+2026-01-29 16:36:34,077 | ERROR | INFRA | main.py | Error al correr Pipeline: expected string or bytes-like object, got 'NoneType'
+2026-01-29 16:42:02,828 | INFO | INFRA | main.py | ==================================================
+2026-01-29 16:42:02,828 | INFO | INFRA | main.py | Iniciando Pipeline ETL
+2026-01-29 16:42:03,775 | ERROR | INFRA | main.py | Error al correr Pipeline: expected string or bytes-like object, got 'NoneType'
+2026-01-29 16:44:39,422 | INFO | INFRA | main.py | ==================================================
+2026-01-29 16:44:39,423 | INFO | INFRA | main.py | Iniciando Pipeline ETL
+2026-01-29 16:44:40,556 | ERROR | INFRA | main.py | Error al correr Pipeline: expected string or bytes-like object, got 'NoneType'
+2026-01-29 16:45:24,170 | INFO | INFRA | main.py | ==================================================
+2026-01-29 16:45:24,171 | INFO | INFRA | main.py | Iniciando Pipeline ETL
+2026-01-29 16:45:25,119 | ERROR | INFRA | main.py | Error al correr Pipeline: expected string or bytes-like object, got 'NoneType'
+2026-01-29 16:47:24,889 | INFO | INFRA | main.py | ==================================================
+2026-01-29 16:47:24,889 | INFO | INFRA | main.py | Iniciando Pipeline ETL
+2026-01-29 16:47:25,682 | INFO | INFRA | main.py | Termiando Pipeline.
+2026-01-29 17:19:16,426 | INFO | INFRA | main.py | ==================================================
+2026-01-29 17:19:16,426 | INFO | INFRA | main.py | Iniciando Pipeline ETL
+2026-01-29 17:19:17,290 | INFO | INFRA | main.py | Termiando Pipeline.
+2026-01-29 17:20:17,444 | INFO | INFRA | main.py | ==================================================
+2026-01-29 17:20:17,444 | INFO | INFRA | main.py | Iniciando Pipeline ETL
+2026-01-29 17:20:18,301 | INFO | INFRA | main.py | Termiando Pipeline.
+2026-01-29 17:23:12,061 | INFO | INFRA | main.py | ==================================================
+2026-01-29 17:23:12,062 | INFO | INFRA | main.py | Iniciando Pipeline ETL
+2026-01-29 17:23:12,852 | INFO | INFRA | main.py | Termiando Pipeline.
+2026-01-29 17:23:23,516 | INFO | INFRA | main.py | ==================================================
+2026-01-29 17:23:23,517 | INFO | INFRA | main.py | Iniciando Pipeline ETL
+2026-01-29 17:23:24,166 | INFO | INFRA | main.py | Termiando Pipeline.
+2026-01-29 17:29:57,210 | INFO | INFRA | main.py | ==================================================
+2026-01-29 17:29:57,248 | INFO | INFRA | main.py | Iniciando Pipeline ETL
+2026-01-29 17:29:58,641 | INFO | INFRA | main.py | Termiando Pipeline.

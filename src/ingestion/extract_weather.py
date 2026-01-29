@@ -7,7 +7,7 @@ config = config_env()
 
 def get_weather():
     try:
-        log.info('Extraccion Del Clima Weather!')
+        print('Extraccion Del Clima Weather!')
         
         keyapi = config.get('apiweather')
 
@@ -17,7 +17,7 @@ def get_weather():
 
         if res.status_code == 200:
             data = res.json()
-            log.info('Extraccion Completado de Weather.')
+            print('Extraccion Completado de Weather.')
             return data
         else:
             log.warning(f'Peticion de Usuario Fallido: {res.status_code}: {res.text}')
