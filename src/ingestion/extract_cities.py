@@ -1,8 +1,7 @@
 import requests
 import time
 import os
-from datetime import date
-
+from datetime import datetime
 from utils.logging import ingestion_logger
 from utils.save_data_minio import save_data_storage
 
