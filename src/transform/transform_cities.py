@@ -1,22 +1,22 @@
 import pandas as pd
 import boto3
+import os
 from io import BytesIO
-from utils.config import config_env
 from utils.logging import transform_logger
 from utils.save_data_minio import save_to_parquet
 
 log = transform_logger()
 
 def read_cities():
-    config = config_env()
     
-    bucketname  = config.get('bucket_name')
-    access_key = config.get('access_key')
-    secret_key = config.get('secret_key')
-    endpoint = config.get("minio_endpoint")
+    
+    bucketname  = os.environ["bucket_name"]
+    access_key = os.environ["access_key"]
+    secret_key = os.environ["secret_key"]
+    endpoint = os.environ["minio_endpoint"]
     
     try:
-        log.info('Iniciando con Lectura de datos.')
+        print('Iniciando con Lectura de datos.')
         s3 = boto3.client(
             's3',
             endpoint_url=endpoint,  
@@ -45,7 +45,7 @@ def read_cities():
                 
         final_df = pd.concat(dfs, ignore_index=True)
         
-        log.info('Finalizacion Lectura de Datos bronze')
+        print('Finalizacion Lectura de Datos bronze')
         return final_df
         
     except Exception as ex:
@@ -57,7 +57,7 @@ def transform_cities():
     try:
         df_cities = read_cities()
         
-        log.info('Inicando Transformacion de datos.')
+        print('Inicando Transformacion de datos.')
         
         df = df_cities[['name']]
         

@@ -1,17 +1,17 @@
 import io
 import json
+import os
 from minio import Minio
 from pyarrow import parquet
-from utils.config import config_env
 from .logging import ingestion_logger, transform_logger
 from pathlib import Path
 
-config = config_env()
+
 
 log_ingestion = ingestion_logger()
 log_transform = transform_logger()
 
-bucket_name = config.get('bucket_name')
+bucket_name = os.environ["bucket_name"]
 
 
 _minio_client = None
@@ -26,9 +26,9 @@ def client_create():
     log_ingestion.info('Creando Cliente Minio!')
     
     try:
-        _minio_client = Minio(config.get('client'),
-               access_key= config.get('access_key'),
-               secret_key= config.get('secret_key'),
+        _minio_client = Minio(os.environ["client"],
+               access_key= os.environ["access_key"],
+               secret_key= os.environ["secret_key"],
                secure= False)
         
         return _minio_client
@@ -36,20 +36,29 @@ def client_create():
         log_ingestion.error('Error al Crear Cliente Minio: {ex}')
         raise ex
 
-
-
-def save_data_storage(data, route_path):
-    path = Path(route_path).as_posix()
-
+def client_bucket_exist():
     try:
+        # llamamos al cliente de minio
         client = client_create()
         found = client.bucket_exists(bucket_name)
-        
+        # miramos si el bucket si exista
+
         if not found:
             client.make_bucket(bucket_name)
             log_ingestion.info('Bucket Creado Correctamente.')
         else:
             log_ingestion.info('Bucket Encontrado Correctamente.')
+        
+        return client
+    except Exception as ex:
+        log_transform.error(f'Error en el cliente y en la busqueda de bucket.')
+        
+        
+def save_data_storage(data, route_path):
+    path = Path(route_path).as_posix()
+
+    try:
+        client = client_bucket_exist()
         
         json_bytes = json.dumps(data, indent=2, ensure_ascii=False).encode('utf-8')
         json_bytesid = io.BytesIO(json_bytes)
@@ -74,15 +83,7 @@ def save_to_parquet(data, route_path):
     path = Path(route_path).as_posix()
     
     try:
-        # llamamos al cliente de minio
-        client = client_create()
-        found = client.bucket_exists(bucket_name)
-        # miramos si el bucket si exista
-        if not found:
-            client.make_bucket(bucket_name)
-            log_transform.info('Bucket Creado Correctamente.')
-        else:
-            log_transform.info('Bucket Encontrado Correctamente..')
+        client = client_bucket_exist()
             
         # esto crea un contenedor en memoria
         buffer = io.BytesIO()
