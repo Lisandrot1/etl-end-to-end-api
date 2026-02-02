@@ -1,0 +1,44 @@
+[2026-01-30T21:31:38.813+0000] {processor.py:186} INFO - Started process (PID=336) to work on /opt/airflow/dags/hola.py
+[2026-01-30T21:31:38.816+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/hola.py for tasks to queue
+[2026-01-30T21:31:38.837+0000] {logging_mixin.py:190} INFO - [2026-01-30T21:31:38.834+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/hola.py
+[2026-01-30T21:31:38.933+0000] {processor.py:925} INFO - DAG(s) 'mi_primer_hola_mundo' retrieved from /opt/airflow/dags/hola.py
+[2026-01-30T21:31:39.614+0000] {logging_mixin.py:190} INFO - [2026-01-30T21:31:39.613+0000] {override.py:1900} INFO - Created Permission View: can delete on DAG:mi_primer_hola_mundo
+[2026-01-30T21:31:39.626+0000] {logging_mixin.py:190} INFO - [2026-01-30T21:31:39.626+0000] {override.py:1900} INFO - Created Permission View: can read on DAG:mi_primer_hola_mundo
+[2026-01-30T21:31:39.635+0000] {logging_mixin.py:190} INFO - [2026-01-30T21:31:39.634+0000] {override.py:1900} INFO - Created Permission View: can edit on DAG:mi_primer_hola_mundo
+[2026-01-30T21:31:39.646+0000] {logging_mixin.py:190} INFO - [2026-01-30T21:31:39.645+0000] {override.py:1900} INFO - Created Permission View: can create on DAG Run:mi_primer_hola_mundo
+[2026-01-30T21:31:39.655+0000] {logging_mixin.py:190} INFO - [2026-01-30T21:31:39.655+0000] {override.py:1900} INFO - Created Permission View: can delete on DAG Run:mi_primer_hola_mundo
+[2026-01-30T21:31:39.663+0000] {logging_mixin.py:190} INFO - [2026-01-30T21:31:39.663+0000] {override.py:1900} INFO - Created Permission View: menu access on DAG Run:mi_primer_hola_mundo
+[2026-01-30T21:31:39.673+0000] {logging_mixin.py:190} INFO - [2026-01-30T21:31:39.673+0000] {override.py:1900} INFO - Created Permission View: can read on DAG Run:mi_primer_hola_mundo
+[2026-01-30T21:31:39.675+0000] {logging_mixin.py:190} INFO - [2026-01-30T21:31:39.674+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2026-01-30T21:31:39.700+0000] {logging_mixin.py:190} INFO - [2026-01-30T21:31:39.700+0000] {dag.py:3262} INFO - Creating ORM DAG for mi_primer_hola_mundo
+[2026-01-30T21:31:39.723+0000] {logging_mixin.py:190} INFO - [2026-01-30T21:31:39.722+0000] {dag.py:4180} INFO - Setting next_dagrun for mi_primer_hola_mundo to 2026-01-29 00:00:00+00:00, run_after=2026-01-30 00:00:00+00:00
+[2026-01-30T21:31:39.760+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/hola.py took 0.975 seconds
+[2026-01-30T21:32:10.304+0000] {processor.py:186} INFO - Started process (PID=344) to work on /opt/airflow/dags/hola.py
+[2026-01-30T21:32:10.305+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/hola.py for tasks to queue
+[2026-01-30T21:32:10.308+0000] {logging_mixin.py:190} INFO - [2026-01-30T21:32:10.308+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/hola.py
+[2026-01-30T21:32:10.338+0000] {processor.py:925} INFO - DAG(s) 'mi_primer_hola_mundo' retrieved from /opt/airflow/dags/hola.py
+[2026-01-30T21:32:10.370+0000] {logging_mixin.py:190} INFO - [2026-01-30T21:32:10.369+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2026-01-30T21:32:10.400+0000] {logging_mixin.py:190} INFO - [2026-01-30T21:32:10.400+0000] {dag.py:4180} INFO - Setting next_dagrun for mi_primer_hola_mundo to 2026-01-29 00:00:00+00:00, run_after=2026-01-30 00:00:00+00:00
+[2026-01-30T21:32:10.434+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/hola.py took 0.136 seconds
+[2026-01-30T21:32:41.038+0000] {processor.py:186} INFO - Started process (PID=352) to work on /opt/airflow/dags/hola.py
+[2026-01-30T21:32:41.042+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/hola.py for tasks to queue
+[2026-01-30T21:32:41.048+0000] {logging_mixin.py:190} INFO - [2026-01-30T21:32:41.047+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/hola.py
+[2026-01-30T21:32:41.119+0000] {processor.py:925} INFO - DAG(s) 'mi_primer_hola_mundo' retrieved from /opt/airflow/dags/hola.py
+[2026-01-30T21:32:41.266+0000] {logging_mixin.py:190} INFO - [2026-01-30T21:32:41.266+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2026-01-30T21:32:41.402+0000] {logging_mixin.py:190} INFO - [2026-01-30T21:32:41.401+0000] {dag.py:4180} INFO - Setting next_dagrun for mi_primer_hola_mundo to 2026-01-29 00:00:00+00:00, run_after=2026-01-30 00:00:00+00:00
+[2026-01-30T21:32:41.475+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/hola.py took 0.483 seconds
+[2026-01-30T21:33:08.869+0000] {processor.py:186} INFO - Started process (PID=24) to work on /opt/airflow/dags/hola.py
+[2026-01-30T21:33:08.870+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/hola.py for tasks to queue
+[2026-01-30T21:33:08.873+0000] {logging_mixin.py:190} INFO - [2026-01-30T21:33:08.873+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/hola.py
+[2026-01-30T21:33:09.016+0000] {processor.py:925} INFO - DAG(s) 'mi_primer_hola_mundo' retrieved from /opt/airflow/dags/hola.py
+[2026-01-30T21:33:09.044+0000] {logging_mixin.py:190} INFO - [2026-01-30T21:33:09.043+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2026-01-30T21:33:09.076+0000] {logging_mixin.py:190} INFO - [2026-01-30T21:33:09.076+0000] {dag.py:4180} INFO - Setting next_dagrun for mi_primer_hola_mundo to 2026-01-29 00:00:00+00:00, run_after=2026-01-30 00:00:00+00:00
+[2026-01-30T21:33:09.111+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/hola.py took 0.143 seconds
+[2026-01-30T21:33:39.509+0000] {processor.py:186} INFO - Started process (PID=36) to work on /opt/airflow/dags/hola.py
+[2026-01-30T21:33:39.510+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/hola.py for tasks to queue
+[2026-01-30T21:33:39.517+0000] {logging_mixin.py:190} INFO - [2026-01-30T21:33:39.514+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/hola.py
+[2026-01-30T21:33:39.561+0000] {processor.py:925} INFO - DAG(s) 'mi_primer_hola_mundo' retrieved from /opt/airflow/dags/hola.py
+[2026-01-30T21:33:39.992+0000] {logging_mixin.py:190} INFO - [2026-01-30T21:33:39.992+0000] {dag.py:3239} INFO - Sync 1 DAGs
+[2026-01-30T21:33:40.414+0000] {logging_mixin.py:190} INFO - [2026-01-30T21:33:40.413+0000] {dag.py:3262} INFO - Creating ORM DAG for mi_primer_hola_mundo
+[2026-01-30T21:33:40.430+0000] {logging_mixin.py:190} INFO - [2026-01-30T21:33:40.430+0000] {dag.py:4180} INFO - Setting next_dagrun for mi_primer_hola_mundo to 2026-01-29 00:00:00+00:00, run_after=2026-01-30 00:00:00+00:00
+[2026-01-30T21:33:40.451+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/hola.py took 0.949 seconds

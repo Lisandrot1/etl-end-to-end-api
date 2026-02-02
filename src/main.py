@@ -1,21 +1,23 @@
 from ingestion.extract_cities import get_cities
 from transform.transform_cities import transform_cities
+from utils.logging import logs_logging
 
 
-
-
+log = logs_logging()
 
 def main_pipeline():
-    print('EJECUTANDO EN DOCKER.')
+    log.info('EJECUTANDO EN DOCKER.')
     try:
-        print('='*50)
-        print('Iniciando Pipeline ETL')
+        log.info('='*50)
+        log.info('Iniciando Pipeline ETL')
         get_cities()
         transform_cities()
         
-        print('Termiando Pipeline.')
+        log.info('Termiando Pipeline.')
+        log.info('='*50)
+
     except Exception as ex:
-        print(f'Error al correr Pipeline: {ex}')
+        log.error(f'Error al correr Pipeline: {ex}')
         raise ex
     
 

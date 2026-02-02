@@ -2,14 +2,14 @@ import io
 import json
 import os
 from minio import Minio
-from pyarrow import parquet
-from .logging import ingestion_logger, transform_logger
+#from pyarrow import parquet
+from .logging import logs_logging
 from pathlib import Path
 
 
 
-log_ingestion = ingestion_logger()
-log_transform = transform_logger()
+log = logs_logging()
+
 
 bucket_name = os.environ["bucket_name"]
 
@@ -17,48 +17,39 @@ bucket_name = os.environ["bucket_name"]
 _minio_client = None
 
 def client_create():
-    global _minio_client  # Usamos la variable global
-    
+    global _minio_client
     # 2. Si ya existe el cliente, lo devolvemos sin crear uno nuevo
-    if _minio_client is not None:
+    if _minio_client:
         return _minio_client
     
-    log_ingestion.info('Creando Cliente Minio!')
     
     try:
+        log.info('Creando Cliente Minio!')
         _minio_client = Minio(os.environ["client"],
                access_key= os.environ["access_key"],
                secret_key= os.environ["secret_key"],
                secure= False)
         
+        found = _minio_client.bucket_exists(bucket_name)
+        
+        if not found:
+            _minio_client.make_bucket(bucket_name)
+            log.info('Bucket Creado Correctamente.')
+        else:
+           log.info('Bucket Encontrado Correctamente.')
         return _minio_client
+    
     except Exception as ex:
-        log_ingestion.error('Error al Crear Cliente Minio: {ex}')
+        log.error(f'Error al Crear Cliente Minio: {ex}')
         raise ex
 
-def client_bucket_exist():
-    try:
-        # llamamos al cliente de minio
-        client = client_create()
-        found = client.bucket_exists(bucket_name)
-        # miramos si el bucket si exista
-
-        if not found:
-            client.make_bucket(bucket_name)
-            log_ingestion.info('Bucket Creado Correctamente.')
-        else:
-            log_ingestion.info('Bucket Encontrado Correctamente.')
-        
-        return client
-    except Exception as ex:
-        log_transform.error(f'Error en el cliente y en la busqueda de bucket.')
         
         
 def save_data_storage(data, route_path):
     path = Path(route_path).as_posix()
 
     try:
-        client = client_bucket_exist()
+        client = client_create()
         
         json_bytes = json.dumps(data, indent=2, ensure_ascii=False).encode('utf-8')
         json_bytesid = io.BytesIO(json_bytes)
@@ -72,10 +63,8 @@ def save_data_storage(data, route_path):
             content_type = 'application/json'
         )
         
-        log_ingestion.info(f'{path} Guardado Correctamente.')
-        
     except Exception as ex:
-        log_ingestion.error(f'Error al guardar a Minio: {ex}')
+        log.error(f'Error al guardar a Minio: {ex}')
         
         raise ex
 
@@ -83,7 +72,7 @@ def save_to_parquet(data, route_path):
     path = Path(route_path).as_posix()
     
     try:
-        client = client_bucket_exist()
+        client = client_create()
             
         # esto crea un contenedor en memoria
         buffer = io.BytesIO()
@@ -101,12 +90,11 @@ def save_to_parquet(data, route_path):
             content_type = 'application/octet-stream'
         )
         
-        log_transform.info('Guardado Correctamente.')
-        log_transform.info('='*50)
+        log.info('Guardado Correctamente.')
 
         
     except Exception as ex:
-        log_transform.error(f'Error al Guardar parquet: {ex}')
+        log.error(f'Error al Guardar parquet: {ex}')
         raise ex
 
 

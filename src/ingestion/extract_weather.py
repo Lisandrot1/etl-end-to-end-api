@@ -1,17 +1,17 @@
 import requests
 from utils.logging import ingestion_logger
-from utils.config import config_env
+
 log = ingestion_logger()
 
-config = config_env()
+
 
 def get_weather():
     try:
         print('Extraccion Del Clima Weather!')
         
-        keyapi = config.get('apiweather')
+        #keyapi = config.get('apiweather')
 
-        url = f"https://api.openweathermap.org/data/2.5/weather?q=Vienna&appid={keyapi}"
+        url = f"https://api.openweathermap.org/data/2.5/weather?q=Vienna&appid="
 
         res = requests.get(url)
 
