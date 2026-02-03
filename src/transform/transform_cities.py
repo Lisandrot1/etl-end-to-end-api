@@ -1,29 +1,18 @@
 import pandas as pd
-import boto3
 import os
 from io import BytesIO
 from utils.logging import logs_logging
+from utils.save_data_minio import client_create
 from utils.save_data_minio import save_to_parquet
 
 log = logs_logging()
 
 def read_cities():
-    
-    
     bucketname  = os.environ["bucket_name"]
-    access_key = os.environ["access_key"]
-    secret_key = os.environ["secret_key"]
-    endpoint = os.environ["minio_endpoint"]
     
     try:
         log.info('Leyendo Datos de Bronze.')
-        s3 = boto3.client(
-            's3',
-            endpoint_url=endpoint,  
-            aws_access_key_id=access_key,
-            aws_secret_access_key=secret_key,
-            region_name='us-east-1'
-        )
+        s3 = client_create()
        
         prefix = 'bronze/cities/execution_date=2026-02-02'
         

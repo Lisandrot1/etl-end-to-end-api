@@ -3,8 +3,7 @@ import time
 import os
 from datetime import datetime
 from utils.logging import logs_logging
-from utils.save_data_minio import save_data_storage
-
+from utils.save_data_minio import save_to_json
 
 log = logs_logging()
 
@@ -46,7 +45,7 @@ def get_cities():
                 
                 startRows += maxRows
                 ## Llamamos a la funcin que guarda los datos crudos a minio
-                save_data_storage(
+                save_to_json(
                     geonames,
                     f"bronze/cities/execution_date={execution_date}/cities_{startRows:05d}.json"
                 )

@@ -1,75 +1,88 @@
 import io
 import json
 import os
-from minio import Minio
-#from pyarrow import parquet
+import boto3
+import botocore
 from .logging import logs_logging
-from pathlib import Path
 
 
+  
+bucket_name = os.environ["bucket_name"]
+access_key = os.environ["access_key"]
+secret_key = os.environ["secret_key"]
+endpoint = os.environ["minio_endpoint"]
 
 log = logs_logging()
 
 
-bucket_name = os.environ["bucket_name"]
-
-
-_minio_client = None
+_s3_client = None
 
 def client_create():
-    global _minio_client
+    global _s3_client
     # 2. Si ya existe el cliente, lo devolvemos sin crear uno nuevo
-    if _minio_client:
-        return _minio_client
-    
-    
+    if _s3_client:
+        return _s3_client
+
     try:
         log.info('Creando Cliente Minio!')
-        _minio_client = Minio(os.environ["client"],
-               access_key= os.environ["access_key"],
-               secret_key= os.environ["secret_key"],
-               secure= False)
+        _s3_client = boto3.client(
+                's3',
+                endpoint_url=endpoint,  
+                aws_access_key_id=access_key,
+                aws_secret_access_key=secret_key,
+                region_name='us-east-1'
+            )
         
-        found = _minio_client.bucket_exists(bucket_name)
-        
-        if not found:
-            _minio_client.make_bucket(bucket_name)
-            log.info('Bucket Creado Correctamente.')
-        else:
-           log.info('Bucket Encontrado Correctamente.')
-        return _minio_client
-    
+        try:
+            _s3_client.head_bucket(Bucket= bucket_name)
+            
+            log.info('Bucket Encontrado Correctamente')
+        except botocore.exceptions.ClientError as ex:
+            
+            error_code = ex.responsep['Error']['Code']
+            if error_code == '404':
+                log.info('Bucket no existe. Creando...')
+                # El método correcto es create_bucket
+                
+                _s3_client.create_bucket(Bucket=bucket_name)
+                log.info('Bucket Creado Correctamente.')
+            else:
+                # Si es un error de permisos u otro, lanzarlo
+                raise ex
+            
+        return _s3_client
     except Exception as ex:
         log.error(f'Error al Crear Cliente Minio: {ex}')
         raise ex
 
         
         
-def save_data_storage(data, route_path):
-    path = Path(route_path).as_posix()
+def save_to_json(data, route_path):
+    path = route_path.replace(os.sep, '/')
 
     try:
         client = client_create()
         
-        json_bytes = json.dumps(data, indent=2, ensure_ascii=False).encode('utf-8')
-        json_bytesid = io.BytesIO(json_bytes)
+        buffer = io.BytesIO()
+        json_data = json.dumps(data, indent=2, ensure_ascii=False)
+        buffer.write(json_data.encode('utf-8'))
+        buffer.seek(0)
         
         
         client.put_object(
-            bucket_name = bucket_name,
-            object_name = path,
-            data = json_bytesid,
-            length = len(json_bytes),
-            content_type = 'application/json'
+            Bucket = bucket_name,
+            Key = path,
+            Body = buffer,
+            ContentType = 'application/json'
         )
         
     except Exception as ex:
-        log.error(f'Error al guardar a Minio: {ex}')
-        
+        log.error(f'Error al guardar a Minio: {ex}')        
         raise ex
 
+
 def save_to_parquet(data, route_path):
-    path = Path(route_path).as_posix()
+    path = route_path.replace(os.sep, '/')
     
     try:
         client = client_create()
@@ -83,16 +96,13 @@ def save_to_parquet(data, route_path):
 
         # Lee y escribe los archivos y los sube a minio s3.
         client.put_object(
-            bucket_name = bucket_name,
-            object_name = path,
-            data = buffer,
-            length =buffer.getbuffer().nbytes ,
-            content_type = 'application/octet-stream'
+            Bucket = bucket_name,
+            Key = path,
+            Body = buffer,
+            ContentType = 'application/octet-stream'
         )
-        
         log.info('Parquet Guardado Correctamente.')
 
-        
     except Exception as ex:
         log.error(f'Error al Guardar parquet: {ex}')
         raise ex
