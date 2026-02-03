@@ -90,7 +90,7 @@ def save_to_parquet(data, route_path):
             content_type = 'application/octet-stream'
         )
         
-        log.info('Guardado Correctamente.')
+        log.info('Parquet Guardado Correctamente.')
 
         
     except Exception as ex:

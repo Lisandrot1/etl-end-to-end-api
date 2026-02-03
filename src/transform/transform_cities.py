@@ -16,7 +16,7 @@ def read_cities():
     endpoint = os.environ["minio_endpoint"]
     
     try:
-        log.info('Iniciando con Lectura de datos.')
+        log.info('Leyendo Datos de Bronze.')
         s3 = boto3.client(
             's3',
             endpoint_url=endpoint,  
@@ -25,7 +25,7 @@ def read_cities():
             region_name='us-east-1'
         )
        
-        prefix = 'bronze/cities/ingest_date=2026-01-01'
+        prefix = 'bronze/cities/execution_date=2026-02-02'
         
         response = s3.list_objects_v2(
             Bucket=bucketname,
@@ -45,7 +45,6 @@ def read_cities():
                 
         final_df = pd.concat(dfs, ignore_index=True)
         
-        log.info('Finalizacion Lectura de Datos bronze')
         return final_df
         
     except Exception as ex:
@@ -57,7 +56,7 @@ def transform_cities():
     try:
         df_cities = read_cities()
         
-        log.info('Inicando Transformacion de datos.')
+        log.info('Transformando Datos a Parquet')
         
         df = df_cities[['name']]
         
