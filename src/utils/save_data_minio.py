@@ -6,7 +6,6 @@ import botocore
 from .logging import logs_logging
 
 
-  
 bucket_name = os.environ["bucket_name"]
 access_key = os.environ["access_key"]
 secret_key = os.environ["secret_key"]
