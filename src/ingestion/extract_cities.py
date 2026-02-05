@@ -3,7 +3,7 @@ import time
 import os
 from datetime import datetime
 from utils.logging import logs_logging
-from utils.save_data_minio import save_to_json
+from utils.storage_handler import save_to_json
 
 log = logs_logging()
 

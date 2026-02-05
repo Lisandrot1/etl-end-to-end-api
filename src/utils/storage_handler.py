@@ -1,5 +1,6 @@
 import io
 import json
+import pandas as pd
 import os
 import boto3
 import botocore
@@ -107,3 +108,33 @@ def save_to_parquet(data, route_path):
         raise ex
 
 
+def read_data(prefix):
+    
+    try:
+        log.info('Leyendo Datos de Bronze.')
+        s3 = client_create()
+        
+        response = s3.list_objects_v2(
+            Bucket=bucket_name,
+            Prefix = prefix
+        )
+        
+        dfs = []
+        if 'Contents' in response:
+            for meta in response.get('Contents', []):
+                key = meta["Key"]
+                obj = s3.get_object(Bucket=bucket_name, Key=key)
+                data = obj["Body"].read()
+
+                df = pd.read_json(io.BytesIO(data))
+                dfs.append(df)
+        else:
+                log.error("No files found in the bucket.")
+                
+        final_df = pd.concat(dfs, ignore_index=True)
+        
+        return final_df
+        
+    except Exception as ex:
+        log.error(f'Error al Leer datos de Bronze: {ex}')
+        raise ex
