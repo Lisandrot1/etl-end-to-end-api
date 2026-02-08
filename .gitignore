@@ -3,3 +3,4 @@ __pycache__
 .env
 requeriments.txt
 airflow/logs/
+.vscode

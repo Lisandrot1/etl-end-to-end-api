@@ -39,7 +39,7 @@ def client_create():
             log.info('Bucket Encontrado Correctamente')
         except botocore.exceptions.ClientError as ex:
             
-            error_code = ex.responsep['Error']['Code']
+            error_code = ex.response['Error']['Code']
             if error_code == '404':
                 log.info('Bucket no existe. Creando...')
                 # El método correcto es create_bucket
@@ -135,6 +135,36 @@ def read_data(prefix):
         
         return final_df
         
+    except Exception as ex:
+        log.error(f'Error al Leer datos de Bronze: {ex}')
+        raise ex
+    
+    
+def read_data_to_parquet(prefix):
+    
+    try:
+        log.info('Leyendo Datos de Silver.')
+        s3 = client_create()
+        
+        response = s3.list_objects_v2(
+            Bucket=bucket_name,
+            Prefix = prefix
+        )
+        
+        dfs = []
+        if 'Contents' in response:
+            for meta in response.get('Contents', []):
+                key = meta['Key']
+                obj = s3.get_object(Bucket=bucket_name, Key=key)
+                data = obj["Body"].read()
+                
+                df = pd.read_parquet(io.BytesIO(data))
+                dfs.append(df)
+            
+            return pd.concat(dfs, ignore_index=True)
+        else:
+            log.error("No files found in the bucket.")
+            return pd.DataFrame() # Retornar vacío si no hay nada
     except Exception as ex:
         log.error(f'Error al Leer datos de Bronze: {ex}')
         raise ex

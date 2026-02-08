@@ -1,16 +1,20 @@
 import os
 from utils.logging import logs_logging
-from utils.storage_handler import save_to_parquet
-from utils.storage_handler import read_data
+from utils.date_part import date_parts
+from utils.storage_handler import (
+    read_data,
+    save_to_parquet
+)
+
 
 log = logs_logging()
 
-
         
     
-def transform_cities():
+def transform_cities(execution_date=None):
     try:
-        df_cities = read_data('bronze/cities/execution_date=2026-02-02')
+        year, month, day = date_parts(execution_date)
+        df_cities = read_data(f'bronze/cities/year={year}/month={month}/day={day}')
         
         log.info('Transformando Datos a Parquet')
         
@@ -26,10 +30,12 @@ def transform_cities():
                 'countryCode': 'country_code',
                 'lng': 'lon'
             })
+            
+        year, month, day = date_parts()        
         
         save_to_parquet(
             df,
-            f'silver/cities/current/cities.parquet'
+            f'silver/cities/year={year}/month={month}/day={day}/cities.parquet'
         )
         
     except Exception as ex:

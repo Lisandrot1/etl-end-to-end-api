@@ -4,23 +4,17 @@ import os
 from datetime import datetime
 from utils.logging import logs_logging
 from utils.storage_handler import save_to_json
+from utils.date_part import date_parts
 
 log = logs_logging()
 
-
-username = os.environ["username"]
-
 def get_cities():
     try:
-        log.info('Iniciando Extraccion de Ciudades.')
-        
-        url = 'http://api.geonames.org/searchJSON'
-        
+        log.info('Iniciando Extraccion de Ciudades.')        
         maxRows = 1000
         startRows = 0
         
-        execution_date = datetime.now().strftime("%Y-%m-%d")
-
+        year, month, day = date_parts()
         
         while True:
             
@@ -29,10 +23,13 @@ def get_cities():
                 "fcode": "PPL",
                 "maxRows": maxRows,
                 "startRow": startRows,
-                "username": username
+                "username": os.environ["username"]
             }
             
-            res = requests.get(url, params=params, timeout=30)
+            res = requests.get(
+                'http://api.geonames.org/searchJSON',
+                params=params,
+                timeout=30)
             
             if res.status_code == 200:
                 
@@ -44,10 +41,10 @@ def get_cities():
                     break
                 
                 startRows += maxRows
-                ## Llamamos a la funcin que guarda los datos crudos a minio
+                ## Llamamos a la funcion que guarda los datos crudos a minio
                 save_to_json(
                     geonames,
-                    f"bronze/cities/execution_date={execution_date}/cities_{startRows:05d}.json"
+                    f"bronze/cities/year={year}/month={month}/day={day}/cities_{startRows:05d}.json"
                 )
                 time.sleep(0.3)
 
