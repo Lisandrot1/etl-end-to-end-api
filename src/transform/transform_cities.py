@@ -1,4 +1,3 @@
-import os
 from utils.logging import logs_logging
 from utils.date_part import date_parts
 from utils.storage_handler import (

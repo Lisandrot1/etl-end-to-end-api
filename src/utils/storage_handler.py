@@ -101,7 +101,7 @@ def save_to_parquet(data, route_path):
             Body = buffer,
             ContentType = 'application/octet-stream'
         )
-        log.info('Parquet Guardado Correctamente.')
+        log.info('Datos Parquet Guardados Correctamente.')
 
     except Exception as ex:
         log.error(f'Error al Guardar parquet: {ex}')

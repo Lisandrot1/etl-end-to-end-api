@@ -1,6 +1,8 @@
 from ingestion.extract_cities import get_cities
 from ingestion.extract_weather import get_weather
 from transform.transform_cities import transform_cities
+from transform.transform_weather import transforms_weather
+
 from utils.logging import logs_logging
 import time
 
@@ -12,9 +14,7 @@ def main_pipeline():
     try:
         log.info('='*50)
         log.info('Iniciando Pipeline ETL')
-        get_cities()
-        transform_cities()
-        get_weather()
+        transforms_weather()
 
         
         log.info('Termiando Pipeline.')
