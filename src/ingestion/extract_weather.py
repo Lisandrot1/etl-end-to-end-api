@@ -1,6 +1,6 @@
-import requests
 import os
-import time
+import requests
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from utils.logging import logs_logging
 from utils.date_part import date_parts
 from utils.storage_handler import (
@@ -9,40 +9,74 @@ from utils.storage_handler import (
 )
 
 log = logs_logging()
-
-# Configuración de la API
-WEATHER_API_URL = "https://api.openweathermap.org/data/2.5/weather"
-def get_weather():
-    log.info('Extracción del clima Weather')
-
-    year, month, day = date_parts()
-    apikey = os.environ['apiweather']
-    
-    # llamamos el parquet 
-    read_data = read_data_to_parquet(
-        f'silver/cities/year={year}/month={month}/day={day}'
-    )
-    # creamos una lista vacia para insertar ahi los json
-    data = []
-    #creamos los lotes (batch)
-    batch_size = 500
-    processed_rows = 0
-    for i,columns in enumerate(read_data.itertuples(), start=1):
-        params = {
-            'lat': columns.lat,
-            'lon': columns.lon,
+def get_data_weather(rows,apikey, weather_url):
+    params = {
+            'lat': rows.lat,
+            'lon': rows.lon,
             'appid': apikey,
             'units': 'metric',
             'lang': 'es'
         }
-        try:
-            res = requests.get(
-                WEATHER_API_URL,
-                params=params,
-                timeout=10
-            )
-            res.raise_for_status()
-            data.append(res.json())
+
+    try:
+        res = requests.get(
+            weather_url,
+            params=params,
+            timeout=10
+        )
+        res.raise_for_status()
+        return {
+                'status':'success',
+                'data': res.json()
+            }
+
+    except requests.exceptions.RequestException as e:
+        return {
+            'status': 'error',
+            'error': str(e),
+            'lat': rows.lat,
+            'lon': rows.lon
+        }
+
+def get_weather():
+
+    WEATHER_API_URL = "https://api.openweathermap.org/data/2.5/weather"
+    log.info('Extracción del clima Weather')
+
+    year, month, day = date_parts()
+    apikey = os.environ['apiweather']
+
+    # llamamos el parquet 
+    read_data = read_data_to_parquet(
+        f'silver/cities/year={year}/month={month}/day={day}'
+    )
+
+    #creamos los lotes (batch)
+
+    batch_size = 500
+    processed_rows = 0
+    data = []
+    max_workers = 15
+
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        futures = []
+        for row in read_data.itertuples():
+            future = executor.submit(get_data_weather, row, apikey, WEATHER_API_URL)
+            futures.append(future)
+
+        completed = 0
+        successful = 0
+        failed = 0
+
+        for future in as_completed(futures):
+            result = future.result()
+            completed+=1
+
+            if result['status']=='success':
+                data.append(result['data'])
+                successful+=1
+            else:
+                failed += 1
 
             if len(data) == batch_size:
                 processed_rows += batch_size
@@ -52,12 +86,7 @@ def get_weather():
                 )
                 data.clear()
                 log.info(f'Datos Guardados: {processed_rows}')
-        except requests.exceptions.RequestException as e:
-            log.warning(
-                f'Error al Traer Clima de  ciudades: {e}'
-            )
-            continue
-    # Si quedaron registros sin alcanzar el tamaño de lote, los guardamos
+
     if data:
         processed_rows += len(data)
         save_to_json(
@@ -65,8 +94,8 @@ def get_weather():
             f'bronze/weather/year={year}/month={month}/day={day}/weather_{processed_rows}.json'
         )
         data.clear()
-
-    # Log final indicando que la extracción terminó
-    log.info(f'Extracción del clima finalizada. Registros procesados: {processed_rows}')
+        log.info(f'Datos Guardados: {processed_rows}')
 
 
+
+        
