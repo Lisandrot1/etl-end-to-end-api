@@ -4,3 +4,5 @@ __pycache__
 requeriments.txt
 airflow/logs/
 .vscode
+notebooks/*.json
+notebooks/*.parquet

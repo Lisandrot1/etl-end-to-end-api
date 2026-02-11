@@ -20,14 +20,17 @@ def transform_cities(execution_date=None):
         df = df_cities[[
             'geonameId',
             'name',
+            'countryId',
+            'population',
             'countryCode',
+            'countryName',
             'lat',
             'lng'
             ]].rename(columns={
-                'geonameId': 'city_id',
-                'name': 'name_city',
-                'countryCode': 'country_code',
-                'lng': 'lon'
+                'name':'Name_City',
+                'countryCode':'Country_Code',
+                'countryName':'Country_Name',
+                'lng':'lon'
             })
             
         year, month, day = date_parts()        

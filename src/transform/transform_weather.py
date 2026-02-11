@@ -13,10 +13,14 @@ def transforms_weather():
     df = read_data(f'bronze/weather/year={year}/month={month}/day={day}')
     try:
         log.info('Transformando datos de Weather.')
+        #ordanizamos el dt y cambiamos el nombre y el tipo de dato
+        
+        df['dt'] = pd.to_datetime(df['dt'], unit='s')
+        df['date'] = df['dt'].dt.floor('D')
         df_normalized = pd.json_normalize(df.to_dict('records'))
 
         df_weather = pd.DataFrame({
-            'dt':df_normalized['dt'],
+            'date':df_normalized['date'],
             'lat':df_normalized['coord.lat'],
             'lon':df_normalized['coord.lon'],
             'temp': df_normalized['main.temp'],
