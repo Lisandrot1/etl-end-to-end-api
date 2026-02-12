@@ -54,7 +54,7 @@ def get_weather():
     batch_size = 500
     processed_rows = 0
     data = []
-    max_workers = 11
+    max_workers = 15
 
     with ThreadPoolExecutor(max_workers=max_workers) as executor:
         futures = []
