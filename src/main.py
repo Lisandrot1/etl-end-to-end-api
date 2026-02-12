@@ -13,8 +13,10 @@ def main_pipeline():
     try:
         log.info('='*50)
         log.info('Iniciando Pipeline ETL')
-        
-        main_gold()
+        get_cities()
+        transform_cities()
+        get_weather()
+        transforms_weather()
         log.info('Termiando Pipeline.')
         log.info('='*50)
 

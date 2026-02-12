@@ -53,5 +53,5 @@ def get_cities():
                 break
             
     except Exception as ex:
-        log.error('Error:', exc_info=True)
+        log.error(f'Error: {ex}', exc_info=True)
         raise ex

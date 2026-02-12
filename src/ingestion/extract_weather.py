@@ -11,8 +11,7 @@ from utils.storage_handler import (
 log = logs_logging()
 def get_data_weather(rows,apikey, weather_url):
     params = {
-            'lat': rows.lat,
-            'lon': rows.lon,
+            'id': rows.cityId,
             'appid': apikey,
             'units': 'metric',
             'lang': 'es'
@@ -34,8 +33,7 @@ def get_data_weather(rows,apikey, weather_url):
         return {
             'status': 'error',
             'error': str(e),
-            'lat': rows.lat,
-            'lon': rows.lon
+            'id': rows.cityId
         }
 
 def get_weather():
@@ -56,7 +54,7 @@ def get_weather():
     batch_size = 500
     processed_rows = 0
     data = []
-    max_workers = 15
+    max_workers = 11
 
     with ThreadPoolExecutor(max_workers=max_workers) as executor:
         futures = []
