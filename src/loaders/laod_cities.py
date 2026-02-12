@@ -10,6 +10,7 @@ year, month, day = date_parts()
 
 def dim_cities(df):
     try:
+        log.info('creando')
         dim_cities = df[['cityId', 'Name_City', 'population', 'lat', 'lon']] \
                 .drop_duplicates(subset=['cityId'])
         save_to_parquet(
