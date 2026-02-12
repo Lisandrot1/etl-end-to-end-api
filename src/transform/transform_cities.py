@@ -1,7 +1,7 @@
 from utils.logging import logs_logging
 from utils.date_part import date_parts
 from utils.storage_handler import (
-    read_data,
+    read_data_to_json,
     save_to_parquet
 )
 
@@ -13,7 +13,7 @@ log = logs_logging()
 def transform_cities(execution_date=None):
     try:
         year, month, day = date_parts(execution_date)
-        df_cities = read_data(f'bronze/cities/year={year}/month={month}/day={day}')
+        df_cities = read_data_to_json(f'bronze/cities/year={year}/month={month}/day={day}')
         
         log.info('Transformando Datos a Parquet')
         
@@ -27,6 +27,7 @@ def transform_cities(execution_date=None):
             'lat',
             'lng'
             ]].rename(columns={
+                'geonameId':'cityId',
                 'name':'Name_City',
                 'countryCode':'Country_Code',
                 'countryName':'Country_Name',

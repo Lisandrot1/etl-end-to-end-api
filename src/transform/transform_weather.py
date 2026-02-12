@@ -2,7 +2,7 @@ from utils.logging import logs_logging
 from utils.date_part import date_parts
 import pandas as pd
 from utils.storage_handler import (
-    read_data,
+    read_data_to_json,
     save_to_parquet
 )
 
@@ -10,17 +10,20 @@ log = logs_logging()
 
 def transforms_weather():
     year, month, day = date_parts()
-    df = read_data(f'bronze/weather/year={year}/month={month}/day={day}')
+    df = read_data_to_json(f'bronze/weather/year={year}/month={month}/day={day}')
     try:
         log.info('Transformando datos de Weather.')
         #ordanizamos el dt y cambiamos el nombre y el tipo de dato
         
         df['dt'] = pd.to_datetime(df['dt'], unit='s')
         df['date'] = df['dt'].dt.floor('D')
+        df['date_id'] = pd.to_datetime(df['date']).dt.strftime('%Y%m%d').astype(int)
+
         df_normalized = pd.json_normalize(df.to_dict('records'))
 
         df_weather = pd.DataFrame({
             'date':df_normalized['date'],
+            'date_id':df_normalized['date_id'],
             'lat':df_normalized['coord.lat'],
             'lon':df_normalized['coord.lon'],
             'temp': df_normalized['main.temp'],

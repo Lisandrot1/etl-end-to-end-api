@@ -108,7 +108,7 @@ def save_to_parquet(data, route_path):
         raise ex
 
 
-def read_data(prefix):
+def read_data_to_json(prefix):
     
     try:
         log.info('Leyendo Datos de Bronze.')
