@@ -5,7 +5,7 @@ from utils.storage_handler import (
     save_to_parquet
  )
 
-log = logs_logging()
+log = logs_logging(__name__)
 year, month, day = date_parts()
 
 def dim_cities(df):
@@ -14,7 +14,8 @@ def dim_cities(df):
                 .drop_duplicates(subset=['cityId'])
         save_to_parquet(
             dim_cities,
-            'gold/dim_citie/dim_citie.parquet'
+            'gold/dim_citie/dim_citie.parquet',
+            show_log=False
         )
         return dim_cities
     
@@ -29,7 +30,8 @@ def dim_country(df):
         
         save_to_parquet(
             df_unique_country,
-            'gold/dim_country/dim_country.parquet'
+            'gold/dim_country/dim_country.parquet',
+            show_log=False
         )
         return df_unique_country
     
@@ -49,7 +51,8 @@ def dim_date(df):
         
         save_to_parquet(
             dim_date,
-            'gold/dim_date/dim_date.parquet'
+            'gold/dim_date/dim_date.parquet',
+            show_log=False
         )
         return dim_date
     except Exception as ex:
@@ -79,7 +82,8 @@ def fact_weather(df_weather, df_cities):
 
         save_to_parquet(
             fact_weather,
-            f'gold/fact_weather/year={year}/month={month}/day={day}/fact_weather.parquet'
+            f'gold/fact_weather/year={year}/month={month}/day={day}/fact_weather.parquet',
+            show_log=False
         )
     except Exception as ex:
         log.error(f'ERROR al Convertir Fact_Weather: {ex}',  exc_info=True)
@@ -94,5 +98,6 @@ def main_gold():
         dim_country(cities)
         dim_date(weather)
         fact_weather(weather, cities)
+        log.info('Capa Gold finalizada con exito.')
     except Exception as ex:
         log.error(f'Error en orquestacion de gold: {ex}', exc_info=True)

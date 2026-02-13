@@ -12,7 +12,7 @@ access_key = os.environ["access_key"]
 secret_key = os.environ["secret_key"]
 endpoint = os.environ["minio_endpoint"]
 
-log = logs_logging()
+log = logs_logging(__name__)
 
 
 _s3_client = None
@@ -81,7 +81,7 @@ def save_to_json(data, route_path):
         raise ex
 
 
-def save_to_parquet(data, route_path):
+def save_to_parquet(data, route_path, show_log=True):
     path = route_path.replace(os.sep, '/')
     
     try:
@@ -101,7 +101,8 @@ def save_to_parquet(data, route_path):
             Body = buffer,
             ContentType = 'application/octet-stream'
         )
-        log.info('Datos Parquet Guardados Correctamente.')
+        if show_log:
+            log.info('Datos Parquet Guardados Correctamente.')
 
     except Exception as ex:
         log.error(f'Error al Guardar parquet: {ex}')

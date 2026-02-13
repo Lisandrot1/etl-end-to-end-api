@@ -6,7 +6,7 @@ from utils.storage_handler import (
     save_to_parquet
 )
 
-log = logs_logging()
+log = logs_logging(__name__)
 
 def transforms_weather():
     year, month, day = date_parts()

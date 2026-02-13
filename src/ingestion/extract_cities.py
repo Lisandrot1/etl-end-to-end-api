@@ -6,7 +6,7 @@ from utils.logging import logs_logging
 from utils.storage_handler import save_to_json
 from utils.date_part import date_parts
 
-log = logs_logging()
+log = logs_logging(__name__)
 
 def get_cities():
     try:

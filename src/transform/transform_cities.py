@@ -6,7 +6,7 @@ from utils.storage_handler import (
 )
 
 
-log = logs_logging()
+log = logs_logging(__name__)
 
         
     

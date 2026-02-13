@@ -4,19 +4,23 @@ from transform.transform_cities import transform_cities
 from transform.transform_weather import transforms_weather
 from loaders.laod_cities import main_gold
 from utils.logging import logs_logging
+from utils.storage_handler import client_create
 
 
-log = logs_logging()
+log = logs_logging(__name__)
 
 def main_pipeline():
     log.info('EJECUTANDO EN DOCKER.')
     try:
         log.info('='*50)
         log.info('Iniciando Pipeline ETL')
-        get_cities()
-        transform_cities()
-        get_weather()
-        transforms_weather()
+        
+        # Inicializar infraestructura primero para que los logs queden ordenados
+        #client_create()
+        #get_cities()
+        #transform_cities()
+        #get_weather()
+        #transforms_weather()
         main_gold()
         log.info('Termiando Pipeline.')
         log.info('='*50)

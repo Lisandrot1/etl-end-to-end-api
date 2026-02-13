@@ -8,7 +8,7 @@ from utils.storage_handler import (
     save_to_json
 )
 
-log = logs_logging()
+log = logs_logging(__name__)
 def get_data_weather(rows,apikey, weather_url):
     params = {
             'id': rows.cityId,
