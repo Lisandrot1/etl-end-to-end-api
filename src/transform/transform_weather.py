@@ -24,8 +24,7 @@ def transforms_weather():
         df_weather = pd.DataFrame({
             'date':df_normalized['date'],
             'date_id':df_normalized['date_id'],
-            'lat':df_normalized['coord.lat'],
-            'lon':df_normalized['coord.lon'],
+            'cityId':df_normalized['id'],
             'temp': df_normalized['main.temp'],
             'feels_like': df_normalized['main.feels_like'],
             'humidity': df_normalized['main.humidity'],

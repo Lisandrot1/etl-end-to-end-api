@@ -10,7 +10,6 @@ year, month, day = date_parts()
 
 def dim_cities(df):
     try:
-        log.info('creando')
         dim_cities = df[['cityId', 'Name_City', 'population', 'lat', 'lon']] \
                 .drop_duplicates(subset=['cityId'])
         save_to_parquet(
@@ -59,16 +58,11 @@ def dim_date(df):
 
 def fact_weather(df_weather, df_cities):
     try:
-        df_weather = df_weather[['date_id','lat','lon','temp','feels_like','humidity','weather_main','weather_desc','wind_speed']]
-        
-        df_weather['lat'] = df_weather['lat'].round(4)
-        df_weather['lon'] = df_weather['lon'].round(4)
-        
-        df_cities['lat'] = df_cities['lat'].round(4)
-        df_cities['lon'] = df_cities['lon'].round(4)
+        df_weather = df_weather[['date_id','cityId','temp','feels_like','humidity','weather_main','weather_desc','wind_speed']]
+
         fact = df_weather.merge(
-            df_cities[['cityId', 'lat', 'lon']],
-            on=['lat','lon'],
+            df_cities[['cityId']],
+            on=['cityId'],
             how='left'
         )
         
@@ -82,9 +76,7 @@ def fact_weather(df_weather, df_cities):
             'weather_desc',
             'wind_speed'
         ]]
-        if fact['cityId'].isna().sum() > 0:
-            raise ValueError("Hay registros sin cityId después del merge")
-        
+
         save_to_parquet(
             fact_weather,
             f'gold/fact_weather/year={year}/month={month}/day={day}/fact_weather.parquet'

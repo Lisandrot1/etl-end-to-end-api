@@ -17,6 +17,7 @@ def main_pipeline():
         transform_cities()
         get_weather()
         transforms_weather()
+        main_gold()
         log.info('Termiando Pipeline.')
         log.info('='*50)
 
