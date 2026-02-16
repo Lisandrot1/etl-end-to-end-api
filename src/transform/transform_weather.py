@@ -17,21 +17,30 @@ def transforms_weather():
         
         df['dt'] = pd.to_datetime(df['dt'], unit='s')
         df['date'] = df['dt'].dt.floor('D')
-        df['date_id'] = pd.to_datetime(df['date']).dt.strftime('%Y%m%d').astype(int)
 
         df_normalized = pd.json_normalize(df.to_dict('records'))
 
         df_weather = pd.DataFrame({
-            'date':df_normalized['date'],
-            'date_id':df_normalized['date_id'],
-            'cityId':df_normalized['id'],
+            'date': df_normalized['date'],
+            'cityId': df_normalized['id'],
             'temp': df_normalized['main.temp'],
             'feels_like': df_normalized['main.feels_like'],
+            'temp_min': df_normalized['main.temp_min'],
+            'temp_max': df_normalized['main.temp_max'],
             'humidity': df_normalized['main.humidity'],
+            'pressure': df_normalized['main.pressure'],
+            'sea_level': df_normalized['main.sea_level'],
+            'grnd_level': df_normalized['main.grnd_level'],
             'weather_main': df_normalized['weather'].apply(lambda x: x[0]['main']),
             'weather_desc': df_normalized['weather'].apply(lambda x: x[0]['description']),
-            'wind_speed': df_normalized['wind.speed']
-            
+            'wind_speed': df_normalized['wind.speed'],
+            'wind_deg': df_normalized['wind.deg'],
+            'wind_gust': df_normalized.get('wind.gust', pd.NA),  # Puede no estar siempre
+            'clouds': df_normalized['clouds.all'],
+            'rain_1h': df_normalized.get('rain.1h', 0),  # Asignar 0 si no hay lluvia
+            'sunrise': df_normalized['sys.sunrise'],
+            'sunset': df_normalized['sys.sunset'],
+            'timezone': df_normalized['timezone']
         })
 
         save_to_parquet(

@@ -112,7 +112,7 @@ def save_to_parquet(data, route_path, show_log=True):
 def read_data_to_json(prefix):
     
     try:
-        log.info('Leyendo Datos de Bronze.')
+        log.info('Leyendo Datos Json.')
         s3 = client_create()
         
         response = s3.list_objects_v2(
@@ -130,7 +130,7 @@ def read_data_to_json(prefix):
                 df = pd.read_json(io.BytesIO(data))
                 dfs.append(df)
         else:
-                log.error("No files found in the bucket.")
+                log.error("No se Encontro Ningun Objeto en el Bucket.")
                 
         final_df = pd.concat(dfs, ignore_index=True)
         
@@ -144,7 +144,7 @@ def read_data_to_json(prefix):
 def read_data_to_parquet(prefix):
     
     try:
-        log.info('Leyendo Datos de Silver.')
+        log.info('Leyendo Datos Parquet de Silver.')
         s3 = client_create()
         
         response = s3.list_objects_v2(
@@ -164,7 +164,7 @@ def read_data_to_parquet(prefix):
             
             return pd.concat(dfs, ignore_index=True)
         else:
-            log.error("No files found in the bucket.")
+            log.error("No se Encontro Ningun Objeto en el Bucket.")
             return pd.DataFrame() # Retornar vacío si no hay nada
     except Exception as ex:
         log.error(f'Error al Leer datos de Bronze: {ex}')

@@ -35,18 +35,6 @@ def get_data_weather(rows,apikey, weather_url):
             'error': str(e),
             'id': rows.cityId
         }
-
-'''def get_weather():
-
-    try:
-
-        log.info('Extracción del clima Weather')
-
-        year, month, day = date_parts()
-
-        print(year,month,day)
-    except Exception as ex:
-        log.error(f'error:{ex}')'''
         
 def get_weather():
 
@@ -64,7 +52,7 @@ def get_weather():
 
         #creamos los lotes (batch)
 
-        batch_size = 500
+        batch_size = 1000
         processed_rows = 0
         data = []
         max_workers = 15
@@ -106,7 +94,7 @@ def get_weather():
             )
             data.clear()
             log.info(f'Datos Guardados: {processed_rows}')
-            
+        log.info(f"Éxitos: {successful} | Fallos: {failed} | Completados: {completed}")   
     except Exception as ex:
         log.error(f'Error en la Extracion de Weather: {ex}', exc_info=True)
         raise

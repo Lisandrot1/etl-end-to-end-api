@@ -16,11 +16,11 @@ def main_pipeline():
         log.info('Iniciando Pipeline ETL')
         
         # Inicializar infraestructura primero para que los logs queden ordenados
-        #client_create()
-        #get_cities()
-        #transform_cities()
-        #get_weather()
-        #transforms_weather()
+        client_create()
+        get_cities()
+        transform_cities()
+        get_weather()
+        transforms_weather()
         main_gold()
         log.info('Termiando Pipeline.')
         log.info('='*50)

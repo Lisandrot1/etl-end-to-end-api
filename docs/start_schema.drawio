@@ -4,24 +4,6 @@
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
-                <mxCell id="7" value="dim_date" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="60" y="90" width="140" height="156" as="geometry"/>
-                </mxCell>
-                <mxCell id="8" value="dateId (PK)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="7" vertex="1">
-                    <mxGeometry y="26" width="140" height="26" as="geometry"/>
-                </mxCell>
-                <mxCell id="9" value="date" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="7" vertex="1">
-                    <mxGeometry y="52" width="140" height="26" as="geometry"/>
-                </mxCell>
-                <mxCell id="48" value="year" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="7">
-                    <mxGeometry y="78" width="140" height="26" as="geometry"/>
-                </mxCell>
-                <mxCell id="49" value="month" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="7">
-                    <mxGeometry y="104" width="140" height="26" as="geometry"/>
-                </mxCell>
-                <mxCell id="50" value="day" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="7">
-                    <mxGeometry y="130" width="140" height="26" as="geometry"/>
-                </mxCell>
                 <mxCell id="12" value="dim_country" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="510" y="370" width="140" height="104" as="geometry"/>
                 </mxCell>
@@ -82,9 +64,6 @@
                 <mxCell id="38" value="wind_speed" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="27" vertex="1">
                     <mxGeometry y="208" width="140" height="26" as="geometry"/>
                 </mxCell>
-                <mxCell id="40" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;startArrow=ERone;startFill=0;endArrow=ERmany;endFill=0;" parent="1" source="8" target="33" edge="1">
-                    <mxGeometry relative="1" as="geometry"/>
-                </mxCell>
                 <mxCell id="41" style="edgeStyle=none;html=1;exitX=1.001;exitY=0.687;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;endArrow=ERmany;endFill=0;startArrow=ERone;startFill=0;exitPerimeter=0;" parent="1" source="13" target="32" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
@@ -103,9 +82,6 @@
                 </mxCell>
                 <mxCell id="46" value="N:1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
                     <mxGeometry x="430" y="138" width="40" height="30" as="geometry"/>
-                </mxCell>
-                <mxCell id="47" value="1:N&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;rotation=45;" parent="1" vertex="1">
-                    <mxGeometry x="210" y="128" width="40" height="40" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>

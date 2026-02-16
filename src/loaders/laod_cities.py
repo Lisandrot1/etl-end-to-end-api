@@ -38,47 +38,36 @@ def dim_country(df):
     except Exception as ex:
         log.error(f'ERROR em dim_country: {ex}', exc_info=True)
         
-        
-def dim_date(df):
-    try:
-        df_date = df[['date_id','date']].drop_duplicates().copy()
-
-        df_date['year'] = df_date['date'].dt.year
-        df_date['month'] = df_date['date'].dt.month
-        df_date['day'] = df_date['date'].dt.day
-        
-        dim_date = df_date[['date_id','date','year','month','day']]
-        
-        save_to_parquet(
-            dim_date,
-            'gold/dim_date/dim_date.parquet',
-            show_log=False
-        )
-        return dim_date
-    except Exception as ex:
-        log.error(f'ERROR al Crear Dim_Date: {ex}', exc_info=True)
-
 
 def fact_weather(df_weather, df_cities):
     try:
-        df_weather = df_weather[['date_id','cityId','temp','feels_like','humidity','weather_main','weather_desc','wind_speed']]
+        df_weather = df_weather[[
+            'date',
+            'cityId',
+            'timezone',
+            'temp',
+            'feels_like',
+            'temp_min',
+            'temp_max',
+            'weather_main',
+            'weather_desc',
+            'clouds',
+            'humidity',
+            'pressure',
+            'sea_level',
+            'grnd_level',
+            'wind_speed',
+            'wind_deg',
+            'wind_gust',
+            'rain_1h',
+            'sunrise',
+            'sunset']]
 
-        fact = df_weather.merge(
+        fact_weather = df_weather.merge(
             df_cities[['cityId']],
             on=['cityId'],
             how='left'
         )
-        
-        fact_weather = fact[[
-            'cityId',
-            'date_id',
-            'temp',
-            'feels_like',
-            'humidity',
-            'weather_main',
-            'weather_desc',
-            'wind_speed'
-        ]]
 
         save_to_parquet(
             fact_weather,
@@ -96,7 +85,6 @@ def main_gold():
         weather = read_data_to_parquet(f'silver/weather/year={year}/month={month}/day={day}')
         dim_cities(cities)
         dim_country(cities)
-        dim_date(weather)
         fact_weather(weather, cities)
         log.info('Capa Gold finalizada con exito.')
     except Exception as ex:
