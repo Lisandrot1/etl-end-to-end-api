@@ -10,8 +10,10 @@ year, month, day = date_parts()
 
 def dim_cities(df):
     try:
-        dim_cities = df[['cityId', 'Name_City', 'population', 'lat', 'lon']] \
+        dim_cities = df[['cityId', 'countryId', 'Name_City', 'population', 'lat', 'lon']] \
                 .drop_duplicates(subset=['cityId'])
+                
+       
         save_to_parquet(
             dim_cities,
             'gold/dim_citie/dim_citie.parquet',

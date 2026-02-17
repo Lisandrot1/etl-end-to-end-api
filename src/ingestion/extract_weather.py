@@ -1,5 +1,7 @@
 import os
 import requests
+import itertools
+from requests_ratelimiter import LimiterSession
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from utils.logging import logs_logging
 from utils.date_part import date_parts
@@ -9,25 +11,41 @@ from utils.storage_handler import (
 )
 
 log = logs_logging(__name__)
-def get_data_weather(rows,apikey, weather_url):
+
+# ─────────────────────────────────────────────
+# Sesiones con rate limit por key
+# per_minute=55 → margen de seguridad sobre el límite real de 60
+# ─────────────────────────────────────────────
+API_KEYS = [
+    os.environ['apiweather'],
+    os.environ['apiweather2'],
+    os.environ['apiweather3'],
+    os.environ['apiweather4'],
+    os.environ['apiweather5']
+]
+key_cycle = itertools.cycle(API_KEYS)
+sessions = {key: LimiterSession(per_minute=55) for key in API_KEYS}
+
+
+def get_data_weather(rows, apikey, weather_url):
     params = {
-            'id': rows.cityId,
-            'appid': apikey,
-            'units': 'metric',
-            'lang': 'es'
-        }
+        'id': rows.cityId,
+        'appid': apikey,
+        'units': 'metric',
+        'lang': 'es'
+    }
 
     try:
-        res = requests.get(
+        res = sessions[apikey].get(
             weather_url,
             params=params,
             timeout=10
         )
         res.raise_for_status()
         return {
-                'status':'success',
-                'data': res.json()
-            }
+            'status': 'success',
+            'data': res.json()
+        }
 
     except requests.exceptions.RequestException as e:
         return {
@@ -35,31 +53,28 @@ def get_data_weather(rows,apikey, weather_url):
             'error': str(e),
             'id': rows.cityId
         }
-        
-def get_weather():
 
+
+def get_weather():
     try:
         WEATHER_API_URL = "https://api.openweathermap.org/data/2.5/weather"
         log.info('Extracción del clima Weather')
 
         year, month, day = date_parts()
-        apikey = os.environ['apiweather']
 
-        # llamamos el parquet 
         read_data = read_data_to_parquet(
             f'silver/cities/year={year}/month={month}/day={day}'
         )
 
-        #creamos los lotes (batch)
-
-        batch_size = 1000
+        batch_size = 500
         processed_rows = 0
         data = []
-        max_workers = 15
+        max_workers = 5
 
         with ThreadPoolExecutor(max_workers=max_workers) as executor:
             futures = []
             for row in read_data.itertuples():
+                apikey = next(key_cycle)
                 future = executor.submit(get_data_weather, row, apikey, WEATHER_API_URL)
                 futures.append(future)
 
@@ -69,15 +84,15 @@ def get_weather():
 
             for future in as_completed(futures):
                 result = future.result()
-                completed+=1
+                completed += 1
 
                 if result['status'] == 'success':
                     data.append(result['data'])
-                    successful+=1
+                    successful += 1
                 else:
                     failed += 1
 
-                if len(data) == batch_size:
+                if len(data) >= batch_size:
                     processed_rows += batch_size
                     save_to_json(
                         data,
@@ -94,7 +109,9 @@ def get_weather():
             )
             data.clear()
             log.info(f'Datos Guardados: {processed_rows}')
-        log.info(f"Éxitos: {successful} | Fallos: {failed} | Completados: {completed}")   
+
+        log.info(f"Éxitos: {successful} | Fallos: {failed} | Completados: {completed}")
+
     except Exception as ex:
-        log.error(f'Error en la Extracion de Weather: {ex}', exc_info=True)
+        log.error(f'Error en la Extracción de Weather: {ex}', exc_info=True)
         raise
