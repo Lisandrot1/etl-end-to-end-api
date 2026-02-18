@@ -192,8 +192,8 @@ services:
       - ./analytics:/app
     env_file:
       - .env
-    #ports:
-    #  - "8501:8501"
+    ports:
+      - "8501:8501"
     depends_on:
       - minio
 
